@@ -39,6 +39,11 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
 
     'main',
+    'cart',
+    'catalog',
+    'NDA_app_email',
+
+   
 ]
 
 MIDDLEWARE = [

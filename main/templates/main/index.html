@@ -1,13 +1,22 @@
+{% extends "base.html" %}
+{% load static %}
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{{title}}</title>
-</head>
-<body>
-    <p>{{content}}</p>
-  
-</body>
-</html>
+{% block css %}
+    <link rel="stylesheet" href="{% static "deps/css/my_footer_css.css" %}">
+{% endblock css %}
+
+{% block content %}
+    <h1 class="mt-5 pt-5">Заголовок</h1>
+    <img src="#" alt="картинка">
+    <p>Описание</p>
+    <a href="#">Производители</a>
+    
+{% endblock content %}
+
+{% block footer %}
+    <footer class="py-4 bg-dark">
+        <div class="container">
+            <p class="m-0 text-center text-white">Футер</p>
+        </div>
+    </footer>
+{% endblock footer %}
