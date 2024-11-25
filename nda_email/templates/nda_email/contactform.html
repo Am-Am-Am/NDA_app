@@ -1,0 +1,42 @@
+<script src="https://smartcaptcha.yandexcloud.net/captcha.js" defer></script>
+
+<form
+        id="cart_modal_form"
+       action="{% url 'cart_submit' %}"
+        method="post"
+        enctype="multipart/form-data"
+        hx-post="{% url 'cart_submit' %}"
+        hx-target="#cart_modal_form"
+        hx-swap="outerHTML"
+        novalidate
+>
+    {% csrf_token %}
+    <div class="mb-3">
+        {{ contact_form.name }}
+    </div>
+    <div class="mb-3">
+        {{ contact_form.phone_number }}
+        {% if contact_form.phone_number.errors %}
+            <div style="color: red">
+                {{ contact_form.phone_number.errors }}
+            </div>
+        {% endif %}
+    </div>
+    <div class="mb-3">
+        {{ contact_form.email }}
+            {% if contact_form.email.errors %}
+                <span class="invalid-feedback">
+                    {{ contact_form.email.errors }}
+                </span>
+            {% endif %}
+    </div>
+    <div class="mb-3">
+        {{ contact_form.message }}
+    </div>
+    <div
+            id="captcha-container"
+            class="smart-captcha mb-3"
+            data-sitekey="ysc1_sxny6cNZmnvhyJKrojDDLNxj0nvkGnTleldHzqEo9d9475ca"
+        >
+    </div>
+</form>

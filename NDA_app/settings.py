@@ -11,7 +11,7 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 """
 
 from pathlib import Path
-
+import os
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -38,15 +38,21 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 
-    'main',
+    
     'cart',
     'catalog',
-    'NDA_app_email',
+    'nda_email',
+    'tinymce',
+    'files',
+    'core',
+    'debug_toolbar',
+    'sorl.thumbnail',
 
    
 ]
 
 MIDDLEWARE = [
+    'debug_toolbar.middleware.DebugToolbarMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -82,11 +88,33 @@ WSGI_APPLICATION = 'NDA_app.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.postgresql',
+        # 'NAME': os.getenv('DB_NAME', 'another_db'),
+        # 'USER': os.getenv('DB_USER', 'postgres'),
+        # 'PASSWORD': os.getenv('DB_USER_PASSWORD'),
+        # 'HOST': os.getenv('DB_HOST', 'localhost'),
+        # 'PORT': os.getenv('DB_PORT', '5432'),
+        'NAME': 'nda',
+        'USER': 'root',
+        'PASSWORD': 'root',
+        'HOST': 'localhost',
+        'PORT': '5432',
     }
 }
 
+
+# CELERY SETTINGS
+CELERY_BROKER_URL = os.getenv('CELERY_BROKER_URL')
+CELERY_ACCEPT_CONTENT = ['json']
+CELERY_RESULT_SERIALIZER = 'json'
+CELERY_TASK_SERIALIZER = 'json'
+CELERY_TIMEZONE = os.getenv('TIMEZONE')
+CELERY_RESULT_BACKEND = 'django-db'
+CELERY_BROKER_CONNECTION_RETRY_ON_STARTUP = True
+
+# CELERY FILES UPLOAD SETTINGS
+TEMPORARY_UPLOAD_ROOT = 'tmp/'
+FILE_UPLOAD_MAX_MEMORY_SIZE = 10485760
 
 # Password validation
 # https://docs.djangoproject.com/en/4.2/ref/settings/#auth-password-validators
@@ -125,12 +153,32 @@ USE_TZ = True
 STATIC_URL = 'static/'
 
 STATICFILES_DIRS = [
-    BASE_DIR / 'static'
+    BASE_DIR / 'core/static'
     ]
-
+STATIC_ROOT = os.path.join(BASE_DIR, "/static/")
 MEDIA_URL = 'media/'
 
 MEDIA_ROOT = BASE_DIR / 'media'
+
+# DJANGO_SENDFILE SETTINGS
+PRIVATE_ROOT = os.getenv('PRIVATE_PATH', os.path.join(BASE_DIR, 'private')) 
+SENDFILE_ROOT = 'private/'
+SENDFILE_BACKEND = 'django_sendfile.backends.simple'
+
+
+SESSION_ENGINE = 'django.contrib.sessions.backends.signed_cookies'
+
+MESSAGE_STORAGE = 'django.contrib.messages.storage.session.SessionStorage'
+
+
+# EMAIL_SENDER SETTINGS
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_HOST_USER = os.getenv('HOST_USER')
+EMAIL_HOST_PASSWORD = os.getenv('HOST_PASSWORD')
+RECIPIENT_EMAIL = os.getenv('RECIPIENT')
+EMAIL_PORT = os.getenv('PORT', '587')
+EMAIL_USE_TLS = True
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field

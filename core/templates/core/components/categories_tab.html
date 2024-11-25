@@ -1,0 +1,25 @@
+{% load static %}
+<div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 row-cols-xxl-5 mx-5 mt-5 g-2 g-lg-3">
+    {% for category in categories %}
+        <div class="col">
+            <div class="card nda-card border-dark rounded-3">
+                <a class="text-decoration-none" href="{% url 'category' category_slug=category.slug %}" style="color: inherit">
+                    <div class="position-relative">
+                        {% if not category.logo %}
+                            <img src="{% get_media_prefix %}default.jpg" class="card-image w-100 nda-card-image">
+                        {% else %}
+                                <img src="{{ category.logo.url }}" class="card-image w-100 nda-card-image">
+                        {% endif %}
+                        <div class="card-img-overlay">
+                            <div class="nda-card-overlay position-absolute mb-0 top-0 bottom-0 start-0 end-0">
+                                <h6 class="mt-5 card-title text-center p-3 text-uppercase">{{ category.name }}</h6>
+                            </div>
+                        </div>
+                    </div>
+                    <p class="p-1 card-text fs-6 text-uppercase">{{ category.description }}</p>
+                </a>
+            </div>
+        </div>
+    {% endfor %}
+</div>
+

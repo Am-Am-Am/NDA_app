@@ -1,0 +1,27 @@
+<table id="offers-table">
+    {% if offers_in_cart|length > 0  %}
+        <thead>
+            <tr>
+                <th>Наименование</th>
+                <th>Количество</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for offer in offers_in_cart %}
+            <tr>
+                <td>{{ offer.name }}</td>
+                <td>{{ offer.quantity }}</td>
+                <td >
+                    <button
+                        hx-confirm="Вы уверены?"
+                        hx-target="#offers-table"
+                        hx-delete="{% url 'cart_remove' offer_id=offer.id %}"
+                        class="btn btn-danger"
+                        id="remove-offer-button"
+                    >Удалить</button>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    {% endif %}
+</table>

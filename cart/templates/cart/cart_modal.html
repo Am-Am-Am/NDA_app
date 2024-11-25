@@ -1,0 +1,22 @@
+<div class="modal-content">
+    <div class="modal-header">
+        <h1 class="modal-title fs-5" id="cartModalLabel">Ваш запрос</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+    </div>
+    <div class="modal-body">
+        {% include 'cart/cart_popup.html' %}
+        {% include 'nda_email/contactform.html' %}
+        <div class="mb-3">
+        {{ contact_form.company_details }}
+            {% if contact_form.company_details.errors %}
+                <span style="color: #FF4343">
+                    {{ contact_form.details.errors }}
+                </span>
+            {% endif %}
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Закрыть</button>
+        <button type="submit" form="cart_modal_form" class="btn btn-primary">Отправить запрос</button>
+    </div>
+</div>

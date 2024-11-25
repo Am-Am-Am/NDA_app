@@ -1,0 +1,33 @@
+{% load static %}
+
+{% if brand %}
+    <div class="d-flex flex-row flex-wrap align-items-center" style="min-height: 200px; background: linear-gradient(to right, {{brand.banner_color}}, white);">
+{% else %}
+    <div class="d-flex flex-row flex-wrap align-items-center" style="min-height: 200px; background: linear-gradient(to right, #3391c5, white);">
+{% endif %}
+        <div class="main-container">
+            <div class="d-flex align-items-center justify-content-start">
+                <div class="mt-auto mb-auto me-5">
+                    {% if not brand or not brand.logo%}
+                        <img src="{% get_media_prefix %}logo-header.png" style="height:140px; width:140px;">
+                    {% else %}
+                        <img src="{{ brand.logo.url }}" style="width: 140px; height: 100px; border-radius: 10px">
+                    {% endif %}
+                </div>
+                <div class="flex-column text-white text-uppercase">
+                    {% if brand %}
+                        <h1 class="m-0 fs-2 fw-bold" style="line-height: 48px;">{{ brand.name }}</h1>
+                        <h4 class="m-0 fs-5" style="line-height: 36px;">{{ brand.description }}</h4>
+                    {% else %}
+                        <h1 class="m-0 fs-2 fw-bold" style="line-height: 48px;">{{ category.name }}</h1>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+
+
+

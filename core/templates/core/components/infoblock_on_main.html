@@ -1,0 +1,43 @@
+{% load thumbnail %}
+
+{% if blocks %}
+    <div id="carouselExampleDark" class="carousel carousel-dark slide" data-bs-ride="carousel" style="background-color: #f9f9f7;">
+        <div class="carousel-inner">
+            {% for block in blocks %}
+                <div class="carousel-item {% if forloop.counter == 1 %}active{% endif %}" data-bs-interval="5000000">
+                    <div class="d-flex flex-row flex-wrap infoblock-margin">
+                        <div class="flex-grow-1 mt-auto mb-auto col-auto" style="flex-basis: 30%;">
+                            <h1 class="display-5 text-uppercase text-wrap">{{ block.block_name }}</h1>
+                            {% if block.block_category.is_final %}
+                                <a class="btn button-bg btn-primary btn-lg"
+                                    href="{% url 'offer' brand_slug=block.block_category.brand.slug category_slug=block.block_category.slug %}" role="button">
+                                    {{ block.block_text }}
+                                </a>
+                            {% else %}
+                                <a class="btn button-bg btn-primary btn-lg"
+                                    href="{% url 'category' category_slug=block.block_category.slug %}" role="button">
+                                    {{ block.block_text }}
+                                </a>
+                            {% endif %}
+                        </div>
+                        <div class="col-auto" style="margin-right: 9%">
+                            {% thumbnail block.block_image "x450" as im %}
+                                <img src="{{ im.url }}" alt="..." >
+                            {% endthumbnail %}
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleDark" data-bs-slide="prev" style="width: 7%">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Previous</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleDark" data-bs-slide="next" style="width: 10%">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Next</span>
+        </button>
+    </div>
+{% endif %}
+
+

@@ -1,0 +1,18 @@
+{% if offers %}
+    <h1>Ваш заказ</h1>
+    {% for offer in offers %}
+        {{ offer.name }} - {{ offer.quantity }}
+    {% endfor %}
+
+    <h2>Ваши данные</h2>
+        {{ customer_message }}
+        {{ customer_phone }}
+        {{ customer_email }}
+{% else %}
+    <h1>Ваш запрос</h1>
+        {{ customer_message }}
+        {{ customer_phone }}
+        {{ customer_email }}
+
+{% endif %}
+<h2>Спасибо за ваш запрос, с вами свяжутся в ближайшее время</h2>

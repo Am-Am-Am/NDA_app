@@ -1,0 +1,10 @@
+<h1>Заказ с сайта</h1>
+
+{% if offers %}
+    {% for offer in offers %}
+        {{ offer.name }} - {{ offer.quantity }}
+    {% endfor %}
+{% endif %}
+    {{ customer_message }}
+    {{ customer_phone }}
+    {{ customer_email }}

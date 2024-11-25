@@ -1,0 +1,44 @@
+{% extends 'core/base.html' %}
+{% load pagination_tags %}
+{% block content %}
+    <h1>Результаты поиска</h1>
+{% if messages %}
+    {% for message in messages %}
+        <div>
+            {{ message }}
+        </div>
+    {% endfor %}
+{% elif object_list %}
+    <div>
+        <span>
+            {% if page_obj.has_previous %}
+                <a href="{% url_with_query_params request %}">&laquo; В начало</a>
+                <a href="{% url_with_query_params request page_obj.previous_page_number %}">Предыдущая страница</a>
+            {% endif %}
+            {% if page_obj.paginator.num_pages > 1 %}
+            <span>
+                Страница {{ page_obj.number }} из {{ page_obj.paginator.num_pages }}.
+            </span>
+            {% endif %}
+            {% if page_obj.has_next %}
+                <a href="{% url_with_query_params request page_obj.next_page_number %}">Следующая страница</a>
+                <a href="{% url_with_query_params request page_obj.paginator.num_pages %}">В конец &raquo;</a>
+            {% endif %}
+        </span>
+    </div>
+    <ul>
+    {% for category in object_list %}
+        <li>
+            <div><a href="{% url 'offer' brand_slug=category.brand.slug category_slug=category.slug%}">{{ category.name.upper }}</a></div>
+            <ul>
+                {%  for offer in category.related_offers %}
+                    <li>{{ offer.name }} {{ offer.description }}</li>
+                {% endfor %}
+            </ul>
+        </li>
+    {% endfor %}
+    </ul>
+{% else %}
+    <div>По вашему запросу ничего не найдено. Попробуйте изменить запрос и попробовать снова</div>
+{% endif %}
+{% endblock %}
