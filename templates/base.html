@@ -15,9 +15,10 @@
     {% comment %} <script src="https://smartcaptcha.yandexcloud.net/captcha.js" defer></script> {% endcomment %}
 </head>
 {% include 'core/header.html' %}
+
 <body class="d-flex flex-column h-100" hx-headers='{"X-CSRFToken": "{{ csrf_token }}"}'>
 {% block content %}
 {% endblock %}
 </body>
-{% include 'core/footer.html' %}
+{% include 'core/footer2.html' %}
 </html>

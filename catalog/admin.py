@@ -130,7 +130,7 @@ class OfferAdmin(admin.ModelAdmin):
     list_select_related = True
     list_display = (
         'name',
-        'brand_name',
+        'brand',
         'category',
         'place',
         'status'
@@ -144,7 +144,7 @@ class OfferAdmin(admin.ModelAdmin):
     fields = [
         'name',
         'description',
-        'shipping_pack'
+        'shipping_pack',
         'tech_info',
         'ctru',
         'category',
@@ -161,7 +161,7 @@ class OfferAdmin(admin.ModelAdmin):
 
     @admin.display(description='Бренд', ordering='name')
     def brand_name(self, obj):
-        return obj.category.brand.name
+        return getattr(obj.brand, 'name', '---- ОТСУТСТВУЕТ')
 
 
 admin.site.register(Brand, BrandAdmin)

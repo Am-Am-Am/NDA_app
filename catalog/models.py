@@ -1,7 +1,8 @@
 from django.db import models
 from django.urls import reverse
 from django.core.files.storage import FileSystemStorage
-
+from django.db.models.signals import pre_save
+from django.dispatch import receiver
 
 from NDA_app.settings import PRIVATE_ROOT, SENDFILE_ROOT
 
@@ -192,6 +193,15 @@ class Offer(BaseFields):
         verbose_name='КТРУ'
     )
 
+    brand = models.ForeignKey(
+        Brand,
+        on_delete=models.SET_NULL,
+        null=True,
+        blank=True,
+        verbose_name='Бренд',
+        related_name='offers'
+    )
+
     class Meta:
         ordering = ['place']
         verbose_name = 'Товар'
@@ -199,3 +209,8 @@ class Offer(BaseFields):
 
     def __str__(self):
         return self.name
+    
+@receiver(pre_save, sender=Offer)
+def set_brand_from_category(sender, instance, **kwargs):
+    if instance.category and not instance.brand:
+        instance.brand = instance.category.brand
