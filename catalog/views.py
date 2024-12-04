@@ -38,7 +38,8 @@ class IndexView(TemplateView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['brands'] = Brand.visible.all().order_by('name')
-        context['categories'] = Category.visible.filter(parents=None).filter(brand=None)
+        context['categories'] = Category.visible.filter(parents=None)
+        # context['categories'] = Category.visible.filter(parents=None).filter(brand=None)
         return context
 
 

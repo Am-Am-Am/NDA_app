@@ -1,8 +1,18 @@
 {% load search_query %}
-
+{% load static %}
+{% comment %} 
 <div style="position: relative; right: 11.3%; bottom: 20px">
     <form action="{% url 'search_page' %}" method="get" style="display: flex; justify-content: flex-end; align-items: center;">
         <input style="width: 20rem; height: 45px; border: 1px solid var(--color-theme-card-border); border-radius: 0;" name="q" type="text" value="{% search_query request %}">
         <button class="button-bg search-button" style="height: 45px; width: 45px; border-radius: 0" type="submit"></button>
     </form>
-</div> 
+</div>  {% endcomment %}
+
+
+<form action="{% url 'search_page' %}" class="formInner">
+    <input type="text" placeholder="Искать по артиклу" name='q' value="{% search_query request %}">
+    <button type="submit">
+        <div class="searchButton button"><img src="{% static 'images/SearchButton.svg' %}" alt="Поиск"
+                class="searchImg"></div>
+    </button>
+</form>

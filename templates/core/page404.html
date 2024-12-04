@@ -1,5 +1,31 @@
-{% extends 'core/base.html' %}
+{% extends 'core/base1.html' %}
 
 {% block content %}
-<p>Страница не найдена. Вернуться на <a href="/static">главную страницу</a></p>
+
+<header>
+     <!-- летающая шапка -->
+     {% include "core/components/flyingHeader.html" %}
+       
+     <!-- летающая шапка -->
+</header>
+<body class="body">
+    <div class="container1">
+        <div class="notFoundContent">
+         <div class="notFoundContentTitle">
+             <h1>404</h1>
+             <p>К сожалению, запрашиваемая
+                 Вам страница не найдена</p>
+             <a href="index.html">
+                 <div class="btn">Вернуться на главную страницу</div>
+             </a>
+             
+         </div>
+         <div class="nonFoundContentImage">
+            
+         </div>
+        </div>
+        
+     </div>
+</body>
+
 {% endblock %}

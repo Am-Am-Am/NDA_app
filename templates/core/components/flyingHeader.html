@@ -1,3 +1,5 @@
+{% load static%}
+
 <div class="header nav-container">
     <nav>
 
@@ -54,13 +56,6 @@
             <div class="rightSideInner">
                 <div class="search">
                     <div class="formInner">
-                        <form action="" class="formInner">
-                            <input type="text" placeholder="Искать по артиклу">
-                            <button type="submit">
-                                <div class="searchButton button"><img src="{% static 'images/SearchButton.svg' %}" alt="Поиск"
-                                        class="searchImg"></div>
-                            </button>
-                        </form>
                         {% include 'core/components/search_field.html' %}
                     </div>
                 </div>

@@ -1,0 +1,108 @@
+{% load static %}
+
+<div class="container1">
+  <div class="catalog">
+    <h2>Каталог</h2>
+    <div class="choice">
+      <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
+        <li class="nav-item" role="presentation">
+          <button class="active" id="pills-home-tab" data-bs-toggle="pill" data-bs-target="#pills-home" type="button" role="tab" aria-controls="pills-home" aria-selected="true">Выбор по производителю</button>
+        </li>
+        <li class="nav-item" role="presentation">
+          <button class="" id="pills-profile-tab" data-bs-toggle="pill" data-bs-target="#pills-profile" type="button" role="tab" aria-controls="pills-profile" aria-selected="false">Выбор по категориям</button>
+        </li>
+      </ul>
+    </div>
+    <div class="tab-content" id="pills-tabContent">
+      <div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">
+        <!-- Выбор по производителям -->
+        <!-- каталог -->
+        <div class="catalogItems">
+          {% for brand in brands %}
+            <a href="{% url 'brand' brand_slug=brand.slug %}">
+              <div class="catalogItem">
+                <div class="catalogItemImg">
+                  <img src="{{ brand.logo.url }}" alt="{{ brand.name }}" />
+                </div>
+                <h3>{{ brand.name }}</h3>
+                <p>{{ brand.description }}</p> <!-- Замените description на соответствующее поле, если оно есть -->
+              </div>
+            </a>
+          {% endfor %}
+
+          <!-- 3 пустых дива - для ровной сетки flex -->
+          <div class="emptyEl"></div>
+          <div class="emptyEl"></div>
+          <div class="emptyEl"></div>
+          <!-- 3 пустых дива - для ровной сетки flex -->
+        </div>
+        <!-- конец каталога -->
+      </div>
+      <div class="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab">
+        <!-- Выбор по категориям -->
+        <div class="catalogItems">
+          {% for category in categories %}
+            <a href="{% url 'category' category_slug=category.slug %}">
+              <div class="catalogItem">
+                <div class="catalogItemImg">
+                  {% if catagory.logo %}
+                    <img src="{{category.logo.url}}" alt="{{catagory.name}}" />
+                  {% endif %}
+                </div>
+                <h3>{{category.name}}</h3>
+                <p>{{category.description}}</p>
+              </div>
+            </a>
+          {% endfor %}
+
+          <!-- 3 пустых дива - для ровной сетки flex -->
+          <div class="emptyEl"></div>
+          <div class="emptyEl"></div>
+          <div class="emptyEl"></div>
+          <!-- 3 пустых дива - для ровной сетки flex -->
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="infoMain">
+    <div class="infoImg">
+      <div class="slider-container sliderInfo">
+        <div class="slider sliderInfo">
+          <div class="sliderImg">
+            <img src="{% static 'images/Sklad NDA.jpg' %}" alt="" />
+          </div>
+          <div class="sliderImg">
+            <img src="{% static 'images/Sklad NDA_2.jpg' %}" alt="" />
+          </div>
+          <div class="sliderImg">
+            <img src="{% static 'images/Sklad NDA_5.jpg' %}" alt="" />
+          </div>
+        </div>
+        <div class="slick-dots"></div>
+      </div>
+    </div>
+    <div class="infoText">
+      <h3>Работаем для <br /> вас с 1992 года</h3>
+      <p>Компания "НДА Деловая медицинская компания" уже 33 года является Вашим партнером и поставщиком оборудования и расходных материалов для хирургии, анестезиологии и реанимации, рентгенхирургии и других направлений.</p>
+      <p>Наш новый складской комплекс, расположенный на площади более 6000 квадратных метров позволяет компании имеет большие складские запасы самых популярных товаров, поэтому может поставить их в короткие сроки. Мы гарантируем Вам качество продукции, представленной на сайте. На все товары нашего каталога есть Регистрационные удостоверения МЗ РФ.</p>
+      <p>Нашими поставщиками являются мировые лидеры в производстве оборудования и расходных медицинских материалов. С их продукцией Вы можете ознакомиться на нашем сайте.</p>
+      <p>В настоящее время у нашей компании более 7500 клиентов. Таких успехов мы добились благодаря слаженной работе всего нашего дружного коллектива и конечно благодаря Вам - нашим клиентам.</p>
+      <!--  <a href="#">
+                <div class="buttonInfo button">
+                    <div class="subheaderProductText">Узнать больше</div>
+                    <img src="images/SubheaderProductArrow.svg" alt="">
+                </div>
+            </a>  -->
+    </div>
+  </div>
+  <div class="place">
+    <h2>Наш офис и склад</h2>
+    <!--  <p>Наши 5 филиалов в Санкт-Петербуге являются частью большой сети клиник. У нас есть учебный центр,
+            который готовит лучших врачей и ассистентов в России. В наших филалах работают стоматологи всех
+            специализаций: врачи общего профиля, ортодонты, ортопеды, пародонтологи, хирурги (в том числе -
+            челюстно-лицевого профиля), имплантологи, анестезиологи-реаниматологи.</p>  -->
+    <div class="map">
+      <iframe src="https://yandex.ru/map-widget/v1/?um=constructor%3A483b0761fd50f52fa933af3311c796503d73aaca44becb79b973a587356fa263&amp;source=constructor&theme=dark" width="100%" height="100%" frameborder="0"></iframe>
+    </div>
+  </div>
+</div>
