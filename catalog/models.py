@@ -1,4 +1,5 @@
 from django.db import models
+from django.template.defaultfilters import slugify
 from django.urls import reverse
 from django.core.files.storage import FileSystemStorage
 from django.db.models.signals import pre_save
@@ -88,6 +89,11 @@ class Brand(BaseFields):
         ordering = ['place']
         verbose_name = 'Бренд'
         verbose_name_plural = 'Бренды'
+
+    def save(self, *args, **kwargs):
+        if not self.slug:  # если slug не задан, автоматически создаем его
+            self.slug = slugify(self.name)
+        super().save(*args, **kwargs)  # вызываем метод родительского класса    
 
     def get_absolute_url(self):
         return reverse('brand', kwargs={'brand_slug': self.slug})

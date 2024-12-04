@@ -1,161 +1,594 @@
-{% extends 'core/base.html' %}
+{% extends 'base1.html' %}
 {% load static %}
 {% load thumbnail %}
-{% block title %}<title>{{ category.name }}</title>{% endblock %}
-{% block header %}
+{% comment %} {% block title %}
+  <title>{{ category.name }}</title>
 {% endblock %}
-{% block content %}
+{% block header %}
 
-    {% include 'catalog/components/banner.html' %}
+{% endblock %}
 
-    {% include 'core/components/search_field.html' %}
+{% include 'catalog/components/banner.html' %}
 
-    <script src="{% static '/js/carousel.js' %}"></script>
-    <script src="{% static '/js/offers-htmx-handlers.js' %}"></script>
+  {% include 'core/components/search_field.html' %}
 
-    <div class="main-container">
+  <script src="{% static '/js/carousel.js' %}"></script>
+  <script src="{% static '/js/offers-htmx-handlers.js' %}"></script> 
 
-        {% include 'catalog/components/breadcrumbs.html' %}
+  <div class="main-container">
+   
 
-        <div class="row">
-            <div class="col-md-5">
-                <div class="d-flex justify-content-center align-items-center">
-                    {% thumbnail images.all.0.image "450x450" as im %}
-                        <img id="mainImage" src="{{ im.url }}" class="img-fluid w-auto" style="height: 450px;">
-                    {% endthumbnail %}
+ <div class="row">
+      <div class="col-md-5">
+        <div class="d-flex justify-content-center align-items-center">
+          {% thumbnail images.all.0.image '450x450' as im %}
+          <img id="mainImage" src="{{ im.url }}" class="img-fluid w-auto" style="height: 450px;" />
+          {% endthumbnail %}
+        </div>
+        <div class="thumbnail-carousel carousel carousel-dark">
+          <a class="carousel-control-prev" type="button" id="prevControl">
+            <span class="offer-carousel-previous" aria-hidden="true"></span>
+            <span class="visually-hidden">Previous</span>
+          </a>
+          <a class="carousel-control-next" type="button" id="nextControl">
+            <span class="offer-carousel-next" aria-hidden="true"></span>
+            <span class="visually-hidden">Next</span>
+          </a>
+          <div class="thumbnails" style="margin: auto">
+            {% for image in images %}
+              {% thumbnail image.image '450x450' as im %}
+              <img src="{{ im.url }}" class="p-2 w-auto" style="height: 150px; " onclick="changeImage(this.src)" />
+              {% endthumbnail %}
+            {% endfor %}
+          </div>
+          {% for image in images %}
+          {% thumbnail image.image '450x450' as im %}
+          <img src="{{ im.url }}" />
+          {% endthumbnail %}
+        {% endfor %}
+        </div>
+      </div>
+      <div class="col-md-7 d-flex flex-column justify-content-start">
+        <h2 class="mb-5">{{ category.name }}</h2>
+        {{ category.description|safe }}
+      </div>
+    </div> 
+
+    <table class="table-responsive table-bordered my-5 w-100" style="border: 2px solid #3391c5; box-shadow: 0 0 5px 0 #000000">
+      <thead>
+        <tr style="background: rgb(249, 249, 247);">
+          <th scope="col" class="col-sm-2 text-center" style="border-right: 1px solid #a1a1a0">
+            <strong>Код</strong>
+          </th>
+          <th scope="col" class="col-sm-7 text-start" style="border-right: 1px solid #a1a1a0">
+            <strong>Описание</strong>
+          </th>
+          <th scope="col" class="col-sm-1 text-start" style="border-right: 1px solid #a1a1a0">
+            <strong>Количество в упаковке</strong>
+          </th>
+          <th scope="col" class="col-sm-2">Количество</th>
+        </tr>
+      </thead>
+      <tbody class="table-group-divider">
+        {% for offer in offers %}
+          <tr>
+            <td class="text-center align-middle" style="border-top: 1px solid #a1a1a0; border-bottom: 1px solid #a1a1a0; border-right: 1px solid #a1a1a0; font-size: 20px;">{{ offer.name }}</td>
+            <td class="text-start align-middle" style="border-top: 1px solid #a1a1a0; border-left: 1px solid #a1a1a0; border-right: 1px solid #a1a1a0; font-size: 20px;">{{ offer.description }}</td>
+            <td class="text-start align-middle" style="border-top: 1px solid #a1a1a0; border-left: 1px solid #a1a1a0; border-right: 1px solid #a1a1a0; font-size: 20px;">{{ offer.shipping_pack }}</td>
+            <td class="text-start align-middle" style="border-top: 1px solid #a1a1a0; border-left: 1px solid #a1a1a0;">
+              <form hx-post="{% url 'cart_add' offer_id=offer.pk %}" hx-target="#cart" hx-swap="outerHTML">
+                <div class="input-group justify-content-evenly">
+                  <input class="form-control" type="number" name="quantity" min="1" required="" id="id_quantity" />
+                  <button class="btn button-bg btn-primary" type="submit" value="">Добавить</button>
                 </div>
-                <div class="thumbnail-carousel carousel carousel-dark">
-                    <a class="carousel-control-prev" type="button" id="prevControl">
-                        <span class="offer-carousel-previous" aria-hidden="true"></span>
-                        <span class="visually-hidden">Previous</span>
-                    </a>
-                    <a class="carousel-control-next" type="button" id="nextControl">
-                        <span class="offer-carousel-next" aria-hidden="true"></span>
-                        <span class="visually-hidden">Next</span>
-                    </a>
-                    <div class="thumbnails" style="margin: auto">
-                        {% for image in images %}
-                            {% thumbnail image.image "450x450" as im %}
-                                <img src="{{ im.url }}" class="p-2 w-auto" style="height: 150px; " onclick="changeImage(this.src)">
-                            {% endthumbnail %}
-                        {% endfor %}
+              </form>
+            </td>
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table> 
+
+   <div id="cart">
+      <div>
+        Позиций в запросе: <span id="offers-in-cart-counter">{{ offers_in_cart|length }}</span>
+      </div>
+      <button type="button" class="btn button-bg btn-primary" hx-get="{% url 'cart_modal' %}" hx-target="#dialog">Отправить запрос</button>
+    </div> 
+
+    <!-- Placeholder for the modal -->
+ <div id="modal" class="modal fade">
+      <div id="dialog" class="modal-dialog" hx-target="this"></div>
+    </div>
+
+    <!-- Empty toast to show the message -->
+
+    <div class="toast-container position-fixed top-0 end-0 p-3" style="z-index: 2000;">
+      <div id="toast" class="toast align-items-center text-white border-0 bg-success" role="alert" aria-live="assertive" aria-atomic="true">
+        <div class="d-flex">
+          <div id="toast-body" class="toast-body"></div>
+          <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
+        </div>
+      </div>
+      <div id="toast-warning" class="toast align-items-center text-white border-0 bg-warning" role="alert" aria-live="assertive" aria-atomic="true">
+        <div class="d-flex">
+          <div id="toast-warning-body" class="toast-body"></div>
+          <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
+        </div>
+      </div>
+    </div>
+  </div>  {% endcomment %}
+  
+  {% block content %}
+
+  <header style="height: 0px;">
+    {% include 'core/components/flyingHeader.html' %}
+  </header>
+  <main class="main">
+    <div class="container1">
+      {% include 'catalog/components/breadcrumbs.html' %}
+      {% include 'catalog/components/banner.html' %}  
+
+       <div class="product">
+                <div class="productHead">
+                    <div class="productCarousel">
+                        <div class="sliderContainer">
+                            <div class="slider">
+                                {% for image in images %}
+                                    {% thumbnail image.image '600x600' as im %}
+                                    <div><img class="sliderImg" src="{{im.url}}"></div>
+                                    {% endthumbnail %}
+                                {% endfor %} 
+                            </div>
+                            <div class="slider-arrows">
+                                <div class="slick-prev1" style="background-image: url('{% static "images/products/arrowLeft.svg"%}')"></div>
+                                <div class="slick-next1" style="background-image: url('{% static "images/products/arrowRight.svg"%}')"></div>
+                            </div>
+                        </div>
+                        <div class="slider-nav">
+                            
+                            {% for image in images %}
+                            {% thumbnail image.image '600x600' as im %}
+                            <div class="sliderNavEl"><a class="active" data-slide-index="0"><img src="{{im.url}}"></a></div>
+
+                            {% endthumbnail %} 
+
+                           {% endfor %}  
+                        </div>
+                           
+                    </div>
+
+                    <div class="productTitle">
+                        <div class="productTitleText">
+                            <h3>({{brand}})</h3>
+                            <h2>{{ category.name }}</h2>
+                            {{ category.description|safe }}
+                        </div>
+                        <div class="productTitleConnect">
+                            <div class="linkText">
+                                Связаться со специалистом по продукции Medtronic Александр Гарцуев:
+                            </div>
+                            <div class="linkContacts">
+                                <a href="tel:79816967084">
+                                    <div class="linkContactsEl">
+                                        <img src="{% static "images/productCall.svg" %}" alt="">
+                                        <div>+7 (981) 696 - 70 - 84</div>
+                                    </div>
+                                </a>
+                                <a href="mailto:221@nda.ru">
+                                    <div class="linkContactsEl">
+                                        <img src="{% static "images/productMail.svg" %}" alt="">
+                                        <div>221@nda.ru</div>
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div class="col-md-7 d-flex flex-column justify-content-start">
-                <h2 class="mb-5">{{ category.name }}</h2>
-                {{ category.description | safe }}
-            </div>
-        </div>
+                <div class="productInfo">
+                    <div class="productInfoChoice">
+                        <ul class="nav nav-pills" id="pills-tab" role="tablist">
 
-{#        <div class="d-flex">#}
-{#        <div class="divTable">#}
-{#            <div class="divTableBody">#}
-{#                <div class="divTableRowHead">#}
-{#                    <div class="divTableCell">Код</div>#}
-{#                    <div class="divTableCell">Описание</div>#}
-{#                    <div class="divTableCell">Количество в упаковке</div>#}
-{#                    <div class="divTableCell">Количество</div>#}
-{#                </div>#}
-{#                {% for offer in offers %}#}
-{#                <div class="divTableRow">#}
-{#                    <div class="divTableCell"> {{ offer.name }}</div>#}
-{#                    <div class="divTableCell"> {{ offer.description }}</div>#}
-{#                    <div class="divTableCell"> {{ offer.shipping_pack }}</div>#}
-{#                    <div class="divTableCell">#}
-{#                        <form hx-post="{% url 'cart_add' offer_id=offer.pk %}" hx-target="#cart" hx-swap="outerHTML">#}
-{#                            <div class="input-group justify-content-evenly">#}
-{#                                <input class="form-control" type="number" name="quantity" min="1" required="" id="id_quantity">#}
-{#                                <button class="btn button-bg btn-primary" type="submit" value="">Добавить</button>#}
-{#                            </div>#}
-{#                        </form>#}
-{#                    </div>#}
-{#                </div>#}
-{#                {% endfor %}#}
-{#            </div>#}
-{#        </div>#}
-{#        </div>#}
+                            <li class="nav-item" role="presentation">
+                                <button class="nav-link first active" id="pills-description-tab" data-bs-toggle="pill"
+                                    data-bs-target="#pills-description" type="button" role="tab"
+                                    aria-controls="pills-description" aria-selected="true">Описание</button>
+                            </li>
+                            <li class="nav-item" role="presentation">
+                                <button class="nav-link" id="pills-characteristics-tab" data-bs-toggle="pill"
+                                    data-bs-target="#pills-characteristics" type="button" role="tab"
+                                    aria-controls="pills-characteristics" aria-selected="false">Характеристики</button>
+                            </li>
+                            <li class="nav-item" role="presentation">
+                                <button class="nav-link" id="pills-order-tab" data-bs-toggle="pill"
+                                    data-bs-target="#pills-order" type="button" role="tab" aria-controls="pills-order"
+                                    aria-selected="false">Оформить заказ</button>
+                            </li>
+                            <li class="nav-item" role="presentation">
+                                <button class="nav-link" id="pills-catalogs-tab" data-bs-toggle="pill"
+                                    data-bs-target="#pills-catalogs" type="button" role="tab"
+                                    aria-controls="pills-catalogs" aria-selected="false">Каталоги и РУ</button>
+                            </li>
+                            <li class="nav-item" role="presentation">
+                                <button class="nav-link last" id="pills-video-tab" data-bs-toggle="pill"
+                                    data-bs-target="#pills-video" type="button" role="tab" aria-controls="pills-video"
+                                    aria-selected="false">Видео</button>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="tab-content productTabContent" id="pills-tabContent">
+                        <!-- Описание товара/услуги -->
+                        <div class="tab-pane fade show active" id="pills-description" role="tabpanel"
+                            aria-labelledby="pills-description-tab">
+                            <div class="productDescription">
+                                <h2>ПОЛИСОРБ</h2>
+                                <p><b>Применение:</b> для сшивания или для лигирования тканей в общей, торакальной
+                                    хирургии, урологии, гинекологии и офтальмохирургии. Ограничено применение в ССХ и на
+                                    нервных тканях.</p>
+                                <p><b>Действие:</b> Polysorb™ вызывает минимальную воспалительную реакцию в тканях,
+                                    быстро инкапсулируется. Прогрессирующая потеря прочности и окончательное
+                                    рассасывание происходит путем гидролиза, когда Lactomer™ 9-1 распадается на
+                                    гликолиевую и молочную кислоты, которые впоследствии рассасываются и
+                                    метаболизируются в организме.</p>
+                                <p><b>Прочность:</b> первоначальная прочность в узле оценивается как 140% стандарта USP
+                                    и EP. 80% прочности сохраняется в первые 2 недели и 30% сохраняется по истечению 3
+                                    недель после имплантации шовного материала.</p>
+                                <p><b>Рассасывание:</b> начинается как потеря прочности без потери массы и заканчивается
+                                    между 56 и 70 днями.Стерилизация: оксид этилена.</p>
+                                <p><b>Упаковка:</b> Polysorb™ окрашен в фиолетовый цвет для большей наглядности и также
+                                    доступен неокрашенный. Возможные варианты размеров от 2 (метрический размер 5) до
+                                    8-0 (М 0.4). Стерильный шовный материал поставляется в отрезках, катушках,
+                                    безыгольном исполнении или с различными видами игл, как перманентно зафиксированных,
+                                    так и отсоединяемых. Формируется в коробках по 12, 24 и 36 шт.</p>
 
-        <table class="table-responsive table-bordered my-5 w-100" style="border: 2px solid #3391c5; box-shadow: 0 0 5px 0 #000000">
-            <thead>
-                <tr style="background: rgb(249, 249, 247);">
-                    <th scope="col" class="col-sm-2 text-center" style="border-right: 1px solid #a1a1a0">
-                        <strong>Код</strong>
-                    </th>
-                    <th scope="col" class="col-sm-7 text-start" style="border-right: 1px solid #a1a1a0">
-                        <strong>Описание</strong>
-                    </th>
-                    <th scope="col" class="col-sm-1 text-start" style="border-right: 1px solid #a1a1a0">
-                        <strong>Количество в упаковке</strong>
-                    </th>
-                    <th scope="col" class="col-sm-2">
-                        Количество
-                    </th>
-                </tr>
-            </thead>
-            <tbody class="table-group-divider">
-            {% for offer in offers %}
-                <tr>
-                    <td class="text-center align-middle" style="border-top: 1px solid #a1a1a0; border-bottom: 1px solid #a1a1a0; border-right: 1px solid #a1a1a0; font-size: 20px;">
-                        {{ offer.name }}
-                    </td>
-                    <td class="text-start align-middle" style="border-top: 1px solid #a1a1a0; border-left: 1px solid #a1a1a0; border-right: 1px solid #a1a1a0; font-size: 20px;">
-                        {{ offer.description }}
-                    </td>
-                    <td class="text-start align-middle" style="border-top: 1px solid #a1a1a0; border-left: 1px solid #a1a1a0; border-right: 1px solid #a1a1a0; font-size: 20px;">
-                        {{ offer.shipping_pack }}
-                    </td>
-                    <td class="text-start align-middle" style="border-top: 1px solid #a1a1a0; border-left: 1px solid #a1a1a0;">
-                        <form hx-post="{% url 'cart_add' offer_id=offer.pk %}" hx-target="#cart" hx-swap="outerHTML">
-                            <div class="input-group justify-content-evenly">
-                                <input class="form-control" type="number" name="quantity" min="1" required="" id="id_quantity">
-                                <button class="btn button-bg btn-primary" type="submit" value="">Добавить</button>
                             </div>
-                        </form>
-                    </td>
-                </tr>
-            {% endfor %}
-            </tbody>
-        </table>
+                        </div>
+                        <div class="tab-pane fade" id="pills-characteristics" role="tabpanel"
+                            aria-labelledby="pills-characteristics-tab">
+                            <div class="productSpecifications">
+                                <h2>Характеристики</h2>
+                            </div>
+                        </div>
+                        <div class="tab-pane fade" id="pills-order" role="tabpanel" aria-labelledby="pills-order-tab">
+
+                            <div class="placeOrder">
+                                <h2>Форма оформления заказа</h2>
+                                <form action=""></form>
+                                <div class="container1 mt-5">
 
 
 
-        <div id="cart">
-            <div>Позиций в запросе: <span id="offers-in-cart-counter">{{ offers_in_cart|length }}</span></div>
-            <button
-                    type="button"
-                    class="btn button-bg btn-primary"
-                    hx-get="{% url 'cart_modal' %}"
-                    hx-target="#dialog"
-            >
-                Отправить запрос
-            </button>
-        </div>
+                                    <table class="table table-responsive table-borderless">
+                                        <thead>
+                                            <tr class="table-header">
+                                                <th>Код</th>
+                                                <th>Описание</th>
+                                                <th>Уп/шт.</th>
+                                                <th>Количество</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr class="table-row">
+                                                <td>001</td>
+                                                <td>Товар 1</td>
+                                                <td>11</td>
+                                                <td>
+                                                    <button class="btn btn-primary add-button button"
+                                                        onclick="toggleInput(this)">Добавить</button>
+                                                    <div class="quantity-input" style="display:none;">
+                                                        <button class="btn btn-secondary"
+                                                            onclick="changeQuantity(this, -1)">-</button>
+                                                        <input type="number" class=""  value="0">
+                                                        <button class="btn btn-secondary"
+                                                            onclick="changeQuantity(this, 1)">+</button>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            <tr class="table-row">
+                                                <td>002</td>
+                                                <td>Товар 2</td>
+                                                <td>2</td>
+                                                <td>
+                                                    <button class="btn btn-primary add-button button"
+                                                        onclick="toggleInput(this)">Добавить</button>
+                                                    <div class="quantity-input" style="display:none;">
+                                                        <button class="btn btn-secondary"
+                                                            onclick="changeQuantity(this, -1)">-</button>
+                                                        <input type="number" class=" d-inline-block"
+                                                             value="0">
+                                                        <button class="btn btn-secondary"
+                                                            onclick="changeQuantity(this, 1)">+</button>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            <!-- Можно добавить больше строк по аналогии -->
+                                        </tbody>
+                                    </table>
 
-        <!-- Placeholder for the modal -->
-        <div id="modal" class="modal fade">
-            <div id="dialog" class="modal-dialog" hx-target="this"></div>
-        </div>
 
-        <!-- Empty toast to show the message -->
+                                </div>
 
-        <div class="toast-container position-fixed top-0 end-0 p-3" style="z-index: 2000;">
-            <div id="toast" class="toast align-items-center text-white border-0 bg-success" role="alert" aria-live="assertive"
-            aria-atomic="true">
-                <div class="d-flex">
-                    <div id="toast-body" class="toast-body"></div>
-                    <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close">
-                    </button>
+                                </form>
+
+                            </div>
+                        </div>
+
+                        <div class="tab-pane fade" id="pills-catalogs" role="tabpanel"
+                            aria-labelledby="pills-catalogs-tab">
+                            <div class="catalogTutorial">
+                                <h2>
+                                    Каталоги и Руководства по эксплуатации
+                                </h2>
+                            </div>
+                        </div>
+                        <div class="tab-pane fade" id="pills-video" role="tabpanel" aria-labelledby="pills-video-tab">
+                            <div class="productVideo">
+                                <h2>Видео о товаре/услуге</h2>
+
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="placeResult">
+                        <button class='orderButton' data-bs-toggle="modal" data-bs-target="#orderModal" type="submit"
+                            id="orderButton">Оформить заказ</button>
+                        <div class="countItems">
+                            <div class="countText">Всего изделий в заказе:</div>
+                            <div class="count">45</div>
+                        </div>
+                    </div>
+
                 </div>
-            </div>
-            <div id="toast-warning" class="toast align-items-center text-white border-0 bg-warning" role="alert" aria-live="assertive"
-            aria-atomic="true">
-                <div class="d-flex">
-                    <div id="toast-warning-body" class="toast-body"></div>
-                    <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close">
-                    </button>
+        </div>
+    </div>
+    <div class="modal fade" id="orderModal" tabindex="-1" aria-labelledby="orderModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-xl">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="orderModalLabel">Оформить заказ</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Закрыть"></button>
+                </div>
+                <div class="modal-body">
+                    <ul class="nav nav-tabs" id="myTab" role="tablist">
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link active" id="physical-tab" data-bs-toggle="tab"
+                                data-bs-target="#physical" type="button" role="tab" aria-controls="physical"
+                                aria-selected="true">Физическое лицо</button>
+                        </li>
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link" id="legal-tab" data-bs-toggle="tab" data-bs-target="#legal"
+                                type="button" role="tab" aria-controls="legal" aria-selected="false">Юридическое
+                                лицо</button>
+                        </li>
+                    </ul>
+                    <div class="tab-content" id="myTabContent">
+                        <!-- Форма для физического лица -->
+                        <div class="tab-pane fade show active" id="physical" role="tabpanel"
+                            aria-labelledby="physical-tab">
+                            <form class="">
+                                <div class="physicalForm">
+                                    <div class="formEl">
+
+                                        <div class="form-floating mb-3">
+                                            <input type="text" class="form-control" id="fullName" placeholder="ФИО"
+                                                name="fullName" required>
+                                            <label for="fullName">ФИО</label>
+                                        </div>
+                                        <div class="oneLine">
+                                            <div class="form-floating mb-3 w-50">
+                                                <input type="tel" class="form-control" id="phone"
+                                                    placeholder="Номер телефона" name="phone" required>
+                                                <label for="phone">Номер телефона</label>
+                                            </div>
+                                            <div class="form-floating mb-3 w-50">
+                                                <input type="email" class="form-control" id="email"
+                                                    placeholder="Email" name="email" required>
+                                                <label for="email">Email</label>
+                                            </div>
+                                        </div>
+                                        <div class="form-floating mb-3">
+                                            <textarea class="form-control" id="message" rows="3"
+                                                placeholder="Текст письма" name="message" required></textarea>
+                                            <label for="message">Текст письма</label>
+                                        </div>
+                                        <div class="mb-3">
+                                            <label class="input-file">
+                                                <input type="file" name="file">
+                                                <span>Прикрепить файл</span>
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <div class="listOrders mb-3">
+                                        <div class="orderEl mb-3">
+                                            <div class="orderName">Название заказа</div>
+                                            <div class="orderCount">
+                                                <div class="">
+                                                    45
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="orderEl mb-3">
+                                            <div class="orderName">Название заказа</div>
+                                            <div class="orderCount">
+                                                <div class="">
+                                                    45
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="orderEl mb-3">
+                                            <div class="orderName">Название заказа</div>
+                                            <div class="orderCount">
+                                                <div class="">
+                                                    45
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="orderEl mb-3">
+                                            <div class="orderName">Название заказа</div>
+                                            <div class="orderCount">
+                                                <div class="">
+                                                    45
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="orderEl mb-3">
+                                            <div class="orderName">Название заказа</div>
+                                            <div class="orderCount">
+                                                <div class="">
+                                                    45
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="orderEl mb-3">
+                                            <div class="orderName">Название заказа</div>
+                                            <div class="orderCount">
+                                                <div class="">
+                                                    45
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="orderEl mb-3">
+                                            <div class="orderName">Название заказа</div>
+                                            <div class="orderCount">
+                                                <div class="">
+                                                    45
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+
+
+
+                                <div class="form-check mb-3">
+                                    <input class="form-check-input" type="checkbox" id="policyCheck"
+                                        name="policyCheck" required>
+                                    <label class="form-check-label" for="policyCheck">Я прочитал(а) уведомление о
+                                        политике конфиденциальности</label>
+                                </div>
+                                <button type="submit" class="btn ">Отправить</button>
+                            </form>
+                        </div>
+                        <!-- Форма для юридического лица -->
+                        <div class="tab-pane fade" id="legal" role="tabpanel" aria-labelledby="legal-tab">
+                            <form>
+                                <div class="physicalForm">
+                                    <div class="formEl">
+                                        <div class="form-floating mb-3">
+                                            <input type="text" class="form-control" id="fullNameLegal"
+                                                placeholder="ФИО контактного лица" required>
+                                            <label for="fullNameLegal">ФИО контактного лица</label>
+                                        </div>
+                                        <div class="oneLine">
+                                            <div class="form-floating mb-3 w-50">
+                                                <input type="tel" class="form-control" id="phone"
+                                                    placeholder="Номер телефона" name="phone" required>
+                                                <label for="phone">Номер телефона</label>
+                                            </div>
+                                            <div class="form-floating mb-3 w-50">
+                                                <input type="email" class="form-control" id="email"
+                                                    placeholder="Email" name="email" required>
+                                                <label for="email">Email</label>
+                                            </div>
+                                        </div>
+                                        <div class="oneLine">
+                                            <div class="form-floating mb-3 w-50">
+                                                <input type="text" class="form-control" id="companyName"
+                                                    placeholder="Наименование организации" required>
+                                                <label for="companyName">Наименование организации</label>
+                                            </div>
+                                            <div class="form-floating mb-3 w-50">
+                                                <input type="text" class="form-control" id="inn" placeholder="ИНН"
+                                                    required>
+                                                <label for="inn">ИНН</label>
+                                            </div>
+                                        </div>
+                                        <div class="form-floating mb-3">
+                                            <textarea class="form-control" id="message" placeholder="Текст письма"
+                                                required></textarea>
+                                            <label for="message">Комментарий к заказу</label>
+                                        </div>
+                                        <div class="mb-3">
+                                            <label class="input-file">
+                                                <input type="file" name="file">
+                                                <span>Прикрепить файл</span>
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <div class="listOrders mb-3">
+                                        <div class="orderEl mb-3">
+                                            <div class="orderName">Название заказа</div>
+                                            <div class="orderCount">
+                                                <div class="">
+                                                    45
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="orderEl mb-3">
+                                            <div class="orderName">Название заказа</div>
+                                            <div class="orderCount">
+                                                <div class="">
+                                                    45
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="orderEl mb-3">
+                                            <div class="orderName">Название заказа</div>
+                                            <div class="orderCount">
+                                                <div class="">
+                                                    45
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="orderEl mb-3">
+                                            <div class="orderName">Название заказа</div>
+                                            <div class="orderCount">
+                                                <div class="">
+                                                    45
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="orderEl mb-3">
+                                            <div class="orderName">Название заказа</div>
+                                            <div class="orderCount">
+                                                <div class="">
+                                                    45
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="orderEl mb-3">
+                                            <div class="orderName">Название заказа</div>
+                                            <div class="orderCount">
+                                                <div class="">
+                                                    45
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="orderEl mb-3">
+                                            <div class="orderName">Название заказа</div>
+                                            <div class="orderCount">
+                                                <div class="">
+                                                    45
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+
+                                <div class="form-check mb-3">
+                                    <input class="form-check-input" type="checkbox" id="policyCheckLegal" required>
+                                    <label class="form-check-label" for="policyCheckLegal">Я прочитал(а) уведомление
+                                        о политике конфиденциальности</label>
+                                </div>
+                                <button type="submit" class="btn">Отправить</button>
+                            </form>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
+  </main>
+
 {% endblock %}

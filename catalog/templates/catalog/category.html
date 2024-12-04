@@ -68,24 +68,16 @@
     {% include 'core/components/flyingHeader.html' %}
     <!-- летающая шапка -->
   </header>
-  <main >
+  <main class="main">
     <div class="container1">
       {% include 'catalog/components/breadcrumbs.html' %}
-      <div class="brandBanner">
-        <div class="brandLogo">
-          <img src="images/brands/Medtronic.png" alt="" />
-        </div>
-        <div class="brandInfo">
-          <h1>medtronic</h1>
-          <h2>ХИРУРГИЯ И РЕАНИМАЦИЯ</h2>
-        </div>
-      </div>
+      {% include 'catalog/components/banner.html' %}
       <!-- каталог -->
       <div class="catalogBrand">
         <!-- Выбор по производителям -->
 
         <div class="catalogBrandItems">
-          {% cache 600 children_categories category.id %}
+          {% comment %} {% cache 600 children_categories category.id %} {% endcomment %}
 
           {% for category in category.children.all %}
             {% if category.is_final %}
@@ -97,7 +89,6 @@
                     {% else %}
                       <img src="{{ category.logo.url }}" />
                     {% endif %} {% endcomment %}
-
                     <img src="{{ category.logo.url }}" />
                   </div>
                   <div class="catalogBrandItemTitle">{{ category.name }}</div>
@@ -105,14 +96,20 @@
               </div>
             {% endif %}
           {% endfor %}
+          {% comment %} <div class="catalogBrandItem">
+            <a href="product.html">
+              <div class="catalogBrandItemImg"></div>
+              <div class="catalogBrandItemTitle">ТЕРАПИЯ ОТРИЦАТЕЛЬНЫМ ДАВЛЕНИЕМ</div>
+            </a>
+          </div> {% endcomment %}
 
           <!-- 3 пустых дива - для ровной сетки flex -->
-          <!--   <div class="emptyEl"></div>
+          <!--    <div class="emptyEl"></div>
                 <div class="emptyEl"></div>
-                <div class="emptyEl"></div>   -->
+                <div class="emptyEl"></div>    -->
           <!-- 3 пустых дива - для ровной сетки flex -->
 
-          {% endcache %}
+          {% comment %} {% endcache %} {% endcomment %}
         </div>
       </div>
       <!-- конец каталога -->

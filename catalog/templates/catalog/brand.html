@@ -89,7 +89,53 @@
         </div>
     </div>
     {% cache 600 categories brand.id %}
-
+    <div class="row row-cols-1 row-cols-md-2 mt-4">
+      {% for category in categories %}
+        {% if category.is_final %}
+          <div class="col">
+            <a class="text-decoration-none" href="{% url 'offer' brand_slug=category.brand.slug category_slug=category.slug %}" style="color: inherit">
+              <div class="category-card my-3">
+                <div class="d-flex flex-row flex-wrap align-items-center">
+                  <div class="col-xl-5 col-sm-12 col-12 text-sm-center text-center ps-1">
+                    {% if not category.logo %}
+                      <img src="{% get_media_prefix %}default.jpg" />
+                    {% else %}
+                      <img src="{{ category.logo.url }}" />
+                    {% endif %}
+                  </div>
+                  <div class="col-xl-7 col-sm-12 col-12 text-height-media">
+                    <div class="card-body text-xxl-start text-sm-center text-center">
+                      <h5 class="card-text text-uppercase fw-bolder text-wrap">{{ category.name }}</h5>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </a>
+          </div>
+        {% else %}
+          <div class="col">
+            <a class="text-decoration-none" href="{% url 'category' category_slug=category.slug %}" style="color: inherit">
+              <div class="category-card my-3">
+                <div class="d-flex flex-row flex-wrap align-items-center">
+                  <div class="col-xl-5 col-sm-12 col-12 text-sm-center text-center ps-1">
+                    {% if not category.logo %}
+                      <img src="{% get_media_prefix %}default.jpg" />
+                    {% else %}
+                      <img src="{{ category.logo.url }}" />
+                    {% endif %}
+                  </div>
+                  <div class="col-xl-7 col-sm-12 col-12 text-height-media">
+                    <div class="card-body text-xxl-start text-sm-center text-center">
+                      <h5 class="card-text text-uppercase fw-bolder text-wrap">{{ category.name }}</h5>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </a>
+          </div>
+        {% endif %}
+      {% endfor %}
+    </div>
     
     {% endcache %}
   </main>
