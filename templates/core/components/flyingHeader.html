@@ -1,0 +1,151 @@
+<div class="header nav-container">
+    <nav>
+
+        <div class="headerInner">
+            <a class="navbar-brand" href="index.html">
+                <div class="logo">
+                    <img src="{% static "images/logo.svg" %}"/>
+                    <span>
+                        НДА <br>
+                        Деловая медицинская <br>
+                        компания
+                    </span>
+
+                </div>
+            </a>
+            <div class="headerList">
+                <ul class="">
+                    <li class="nav-item">
+                        <a class="" href="#">
+                            <div class="el">
+                                <img src="{% static 'images/Условия работы.svg'%}" alt="Условия Работы" class="me-2">
+                                <div>Условия работы</div>
+                            </div>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="" href="#catalog">
+                            <div class="el">
+                                <img src="{% static 'images/catalog.svg'%}" alt="Каталог" class="me-2">
+                                <div>Каталог</div>
+                            </div>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="" href="certificates.html">
+                            <div class="el ">
+                                <img src="{% static 'images/Сертификаты.svg'%}" alt="РУ и Сертификаты" class="me-2">
+                                <div>РУ и Сертификаты</div>
+                            </div>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="" href="contacts.html">
+                            <div class="el ">
+                                <img src="{% static 'images/контакты.svg'%}" alt="Контакты" class="me-2">
+                                <div>Контакты</div>
+                            </div>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+
+
+            <div class="rightSideInner">
+                <div class="search">
+                    <div class="formInner">
+                        <form action="" class="formInner">
+                            <input type="text" placeholder="Искать по артиклу">
+                            <button type="submit">
+                                <div class="searchButton button"><img src="{% static 'images/SearchButton.svg' %}" alt="Поиск"
+                                        class="searchImg"></div>
+                            </button>
+                        </form>
+                        {% include 'core/components/search_field.html' %}
+                    </div>
+                </div>
+
+                <div class="info">
+                    <div class="time">
+                        Пн-Пт: 10:00 - 18.00
+                    </div>
+                    <div class="number">
+                        <a href="tel:+78127140614">+ 7 (812) 714-06-14</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="searchSmallScreen">
+                <div class="formInner">
+                    <form action="" class="formInner">
+                        <input type="text" placeholder="Искать по артиклу">
+                        <button type="submit">
+                            <div class="searchButton button"><img src="{% static 'images/SearchButton.svg' %}" alt="Поиск"
+                                class="searchImg"></div></div>
+                        </button>
+                    </form>
+                </div>
+            </div>
+            <div class="burger-menu">
+                <input id="menu__toggle" type="checkbox" />
+                <label class="menu__btn" for="menu__toggle">
+                    <span></span>
+                </label>
+
+                <div class="menu__box">
+                    <div class="bd-links">
+                        <ul>
+                            <li>
+                                <a href="index.html">Главная</a>
+                            </li>
+                            <li>
+                                <a href="#">Условия работы</a>
+                            </li>
+                            <li>
+                                <div class="catalogBurgerInner">
+                                    <a class="btn1  d-inline-flex align-items-center rounded" role="button"
+                                        data-bs-toggle="collapse" data-bs-target="#components-collapse"
+                                        aria-expanded="true" aria-current="true">
+                                        Каталог
+                                    </a>
+                                </div>
+                            </li>
+                            <div class="collapse collapseList" id="components-collapse">
+                                <ul>
+                                    <li class="collapseEl">
+                                        <a href="">JOHNSON & JOHNSON</a>
+                                    </li>
+                                    <li class="collapseEl">
+                                        <a href="">JOHNSON & JOHNSON</a>
+                                    </li>
+                                    <li class="collapseEl">
+                                        <a href="">JOHNSON & JOHNSON</a>
+                                    </li>
+                                    <li class="collapseEl">
+                                        <a href="">JOHNSON & JOHNSON</a>
+                                    </li>
+                                </ul>
+                            </div>
+                            <li>
+                                <a href="certificates.html">Сертификаты</a>
+                            </li>
+                            <li>
+                                <a href="contacts.html">Контакты</a>
+                            </li>
+                            <div class="info">
+                                <div class="time">
+                                    Пн-Пт: 10:00 - 18.00
+                                </div>
+                                <div class="number">
+                                    <a href="tel:+78127140614">+ 7 (812) 714-06-14</a>
+                                </div>
+                            </div>
+                        </ul>
+
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </nav>
+</div>
