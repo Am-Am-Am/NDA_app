@@ -1,0 +1,279 @@
+h2{
+    margin-top: 200px;
+    margin-bottom: 40px;
+}
+
+.workInfo {
+    height: 450px;
+    width: 100%;
+    border-radius: 15px;
+    box-shadow: 0 0 40px 3px rgba(0, 0, 0, 0.15);
+    background-image: url('images/workPage/main.png');
+    background-size: cover;
+    background-repeat: no-repeat;
+    padding: 80px;
+}
+
+.workLogo {
+    display: flex;
+    gap: 15px;
+    align-items: center;
+    margin-bottom: 30px;
+}
+
+.workInfo h2 {
+    margin: 0;
+    text-align: left;
+    margin-bottom: 10px;
+    font-family: var(--third-family);
+    font-weight: 700;
+    font-size: 90px;
+    line-height: 133%;
+    text-transform: uppercase;
+}
+
+.workInfo p {
+    width: 50%;
+    font-family: var(--font-family);
+    font-weight: 400;
+    font-size: 25px;
+    color: #1a1a18;
+}
+
+
+.howOrder {
+    margin-top: 200px;
+    margin-bottom: 200px;
+}
+
+.howOrder h2 {
+    margin: 0;
+    margin-bottom: 40px;
+}
+
+.orderSteps {
+    display: flex;
+    gap: 40px;
+    flex-wrap: wrap;
+
+}
+
+.orderStepsEl {
+    height: 320px;
+    background: #fff;
+    border-radius: 10px;
+    background-image: url("images/workPage/marks.svg");
+    background-repeat: no-repeat;
+    background-position: 95% -10px;
+    padding: 30px;
+}
+
+.orderStepsEl:nth-child(1) {
+    width: calc(100% - 67% - 20px);
+
+}
+
+.orderStepsEl:nth-child(2) {
+    width: calc(100% - 33% - 20px);
+
+}
+
+.orderStepsEl:nth-child(3) {
+    width: calc(100% - 33% - 20px);
+}
+
+.orderStepsEl:nth-child(4) {
+    width: calc(100% - 67% - 20px);
+}
+
+.orderStepsElNumber {
+    width: 80px;
+    height: 80px;
+    border-radius: 10px;
+    -webkit-border-radius: 10px;
+    -moz-border-radius: 10px;
+    -ms-border-radius: 10px;
+    -o-border-radius: 10px;
+    background: #c6dff1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: var(--third-family);
+    font-weight: 700;
+    font-size: 40px;
+    line-height: 100%;
+    text-transform: uppercase;
+    color: #3391c5;
+    margin-bottom: 30px;
+    border: 1px solid #3391c5;
+}
+
+.orderStepsEl p {
+    font-family: var(--second-family);
+    font-weight: 400;
+    font-size: 20px;
+    color: #1a1a18;
+}
+
+.orderStepsEl a {
+    text-decoration: none;
+    font-weight: 600;
+    color: #3391c5;
+}
+
+.bullingSteps {
+    margin-top: 40px;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    gap: 40px;
+}
+
+.bullingStepsEl {
+    height: 450px;
+    width: 50%;
+    background: #fff;
+    border-radius: 10px;
+    padding: 30px;
+    font-family: var(--second-family);
+    font-weight: 400;
+    font-size: 20px;
+    color: #1a1a18;
+}
+
+.bullingStepsEl:nth-child(1) {
+    background-image: url('images/workPage/billing1.png');
+    background-position: right;
+    background-repeat: no-repeat;
+}
+
+.bullingStepsEl:nth-child(2) {
+    background-image: url('images/workPage/billing2.png');
+    background-position: right;
+    background-repeat: no-repeat;
+}
+
+
+.reservation {
+    margin-top: 200px;
+    display: flex;
+    gap: 40px;
+
+}
+
+.reservationImages {
+    display: flex;
+    gap: 40px;
+    flex-wrap: wrap;
+}
+
+.reservationImagesEl img {
+    border-radius: 10px;
+    -webkit-border-radius: 10px;
+    -moz-border-radius: 10px;
+    -ms-border-radius: 10px;
+    -o-border-radius: 10px;
+}
+
+.reservation h2 {
+    margin-top: 0;
+    text-align: left;
+}
+
+.reservation li {
+    margin-bottom: 20px;
+    color: #3391C5;
+    font-size: 25px;
+}
+
+
+.reservation span {
+    font-family: var(--second-family);
+    font-weight: 400;
+    font-size: 20px;
+    color: #1a1a18;
+}
+
+.deliverySteps {
+    display: flex;
+    gap: 40px;
+    flex-wrap: wrap;
+    justify-content: space-between;
+
+}
+
+.deliveryStepsEl {
+    background: #fff;
+    border-radius: 10px;
+    height: 380px;
+    padding: 30px;
+    font-family: var(--second-family);
+    font-weight: 400;
+    font-size: 20px;
+    color: #1a1a18;
+
+}
+
+.deliveryStepsEl:nth-child(1) {
+    width: calc(100% - 50% - 20px);
+}
+
+.deliveryStepsEl:nth-child(2) {
+    width: calc(100% - 50% - 20px);
+}
+
+.deliveryStepsEl:nth-child(3) {
+    width: calc(100% - 67% - 30px);
+}
+
+.deliveryStepsEl:nth-child(4) {
+    width: calc(100% - 67% - 30px);
+}
+
+.deliveryStepsEl:nth-child(5) {
+    width: calc(100% - 67% - 30px);
+}
+
+.refund {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    gap: 40px;
+}
+
+.refundEl {
+    height: 260px;
+    width: calc(100% - 50% - 20px);
+    background: #fff;
+    border-radius: 10px;
+    padding: 30px;
+}
+
+.refundEl h3 {
+    font-family: var(--second-family);
+    font-weight: 500;
+    font-size: 30px;
+}
+
+.refundEl p {
+    font-family: var(--second-family);
+    font-weight: 400;
+    font-size: 20px;
+    color: #1a1a18;
+}
+
+.truck{
+    margin-top: 40px;
+    width: 100%;
+    height: 470px;
+    border-radius: 15px;
+    -webkit-border-radius: 15px;
+    -moz-border-radius: 15px;
+    -ms-border-radius: 15px;
+    -o-border-radius: 15px;
+    background-image: url("images/workPage/truck.png");
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+/* work.html */

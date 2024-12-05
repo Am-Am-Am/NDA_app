@@ -6,7 +6,7 @@ from django.contrib import messages
 from catalog.models import Category, Brand, Offer
 from files.models import ModelFile, ModelImage
 from cart.forms import CartAddProductForm
-
+from django.views.generic import DetailView
 
 SEARCH_QUERY_PARAM = 'q'
 
@@ -106,3 +106,32 @@ class SiteSearchView(ListView):
             .prefetch_related(related_offers).distinct()
         )
         return qs
+
+class BrandsWithCertificatesView(ListView):
+    model = Brand
+    template_name = 'catalog/certificates.html'  
+    context_object_name = 'brands'
+
+    def get_queryset(self):
+        queryset = super().get_queryset()
+        brands_with_certs = set(Brand.objects.filter(category__modelfile__isnull=False))
+        return queryset.filter(id__in=[b.id for b in brands_with_certs])
+    
+
+class BrandCertificatesDetailView(DetailView):
+    model = Brand
+    template_name = 'catalog/brand_certificates_detail.html'  # Указать путь к шаблону
+    context_object_name = 'brand'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        brand = self.object
+        certificates = ModelFile.objects.filter(category__brand=brand)
+        context['certificates'] = certificates
+        return context
+    
+class WorkView(TemplateView):
+    template_name = 'catalog/work.html'
+
+class ContactsView(TemplateView):
+    template_name = 'catalog/contacts.html'

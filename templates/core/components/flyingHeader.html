@@ -4,7 +4,7 @@
     <nav>
 
         <div class="headerInner">
-            <a class="navbar-brand" href="index.html">
+            <a class="navbar-brand" href="/">
                 <div class="logo">
                     <img src="{% static "images/logo.svg" %}"/>
                     <span>
@@ -18,7 +18,7 @@
             <div class="headerList">
                 <ul class="">
                     <li class="nav-item">
-                        <a class="" href="#">
+                        <a href="{% url 'work' %}">
                             <div class="el">
                                 <img src="{% static 'images/Условия работы.svg'%}" alt="Условия Работы" class="me-2">
                                 <div>Условия работы</div>
@@ -26,7 +26,7 @@
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="" href="#catalog">
+                        <a class="" href="/#catalog">
                             <div class="el">
                                 <img src="{% static 'images/catalog.svg'%}" alt="Каталог" class="me-2">
                                 <div>Каталог</div>
@@ -34,7 +34,7 @@
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="" href="certificates.html">
+                        <a href="{% url 'brands_with_certificates' %}">
                             <div class="el ">
                                 <img src="{% static 'images/Сертификаты.svg'%}" alt="РУ и Сертификаты" class="me-2">
                                 <div>РУ и Сертификаты</div>
@@ -42,7 +42,7 @@
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="" href="contacts.html">
+                        <a href="{% url 'contacts' %}">
                             <div class="el ">
                                 <img src="{% static 'images/контакты.svg'%}" alt="Контакты" class="me-2">
                                 <div>Контакты</div>
@@ -91,7 +91,7 @@
                     <div class="bd-links">
                         <ul>
                             <li>
-                                <a href="index.html">Главная</a>
+                                <a href="/">Главная</a>
                             </li>
                             <li>
                                 <a href="#">Условия работы</a>

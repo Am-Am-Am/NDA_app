@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Сертификаты для {{ brand.name }}</title>
+</head>
+<body>
+    <h1>Сертификаты для {{ brand.name }}</h1>
+    <ul>
+        {% for certificate in certificates %}
+            <li><a href="{{ certificate.file.url }}">{{ certificate.file.name }}</a></li>
+        {% empty %}
+            <p>Нет сертификатов для данного бренда.</p>
+        {% endfor %}
+    </ul>
+
+    
+</body>
+</html>

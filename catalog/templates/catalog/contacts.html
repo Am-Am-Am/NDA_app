@@ -1,0 +1,181 @@
+{% extends 'base1.html' %}
+{% load static %}
+{% block title %}
+<title> Контакты</title>
+{% endblock%}
+
+{% block content%}
+<header style="height: 0px;">
+    <!-- летающая шапка -->
+    {% include "core/components/flyingHeader.html" %}
+       
+    <!-- летающая шапка -->
+</header>
+<main class="main">
+    <div class="container1">
+        <div class="breadCrumbs">
+            <ol class="breadcrumb">
+              <li class="breadcrumb-item fs-4">
+                <a href="{% url 'home' %}" style="color: var(--color-theme-main)">ГЛАВНАЯ</a>
+              </li>
+              <li class="breadcrumb-item active fs-4" aria-current="page"> Контакты </li>
+            </ol>
+        </div>
+       
+        <div class="brandBanner contactsBanner">
+          <div class="brandLogo">
+              <img src="{% static "images/contacts/contactsPhone.svg" %}" alt="">
+          </div>
+          <div class="brandInfo">
+              <h1>Контакты</h1>
+              <h2>С нами можно связаться</h2>
+          </div>
+      </div>
+     <!-- карта     -->
+      
+      <div class="contactsMap">
+          <iframe src="https://yandex.ru/map-widget/v1/?um=constructor%3A483b0761fd50f52fa933af3311c796503d73aaca44becb79b973a587356fa263&amp;source=constructor&theme=dark" width="100%" height="100%" frameborder="0"></iframe>
+      </div>
+      <!-- карта     -->
+       <!-- адреса -->
+      <div class="addresses">
+          <div class="ContactAddress mainAddress">
+              <div class="addressImg">
+                  <img src="{% static "images/contacts/contactsFirst.svg" %}" alt="">
+              </div>
+              <div class="addressInfo">
+                  <h3>ООО "НДА Деловая медицинская компания"</h3>
+                  <p>Юр.адрес:199034, Санкт-Петербург, 16-я линия В.О., 
+                      <br> д.7, литера А, помещ. 1-Н, часть №97 
+                      <br> ИНН: 7801314509
+                      <br>КПП 780101001
+                      <br>Р/С: 40702810755230000143 ПАО Сбербанк
+                      <br>К/С: 30101810500000000653
+                      <br>БИК: 044030653
+                      <br>ОГРН: 1167847307980
+                  </p>
+              </div>
+          </div>
+          <div class="ContactAddress">
+              <div class="addressImg">
+                <img src="{% static "images/contacts/contactsSecond.svg" %}" alt="">
+                
+              </div>
+              <div class="addressInfo">
+                  <h3>офис</h3>
+                  <div class="addressInfoEl">
+                      <div class="addressInfoElImg">
+                          <img src="{% static "images/contacts/location.svg" %}" alt="">
+                      </div>
+                      <div class="addressInfoElText">
+                          190121, Санкт-Петербург, ул.Перевозная, 6 <br>(о.Матисов)
+                      </div>
+                  </div>
+                  <div class="addressInfoEl">
+                      <div class="addressInfoElImg">
+                        <img src="{% static "images/contacts/call.svg" %}" alt="">
+                      </div>
+                      <div class="addressInfoElText">
+                          <a href="tel:+78127140614">+7 (812) 714 - 06 -14</a>
+                      </div>
+                  </div>
+                  <div class="addressInfoEl">
+                      <div class="addressInfoElImg">
+                        <img src="{% static "images/contacts/time.svg" %}" alt="">
+                      </div>
+                      <div class="addressInfoElText">
+                          с 10:00 до 18:00
+                      </div>
+                  </div>
+                  <div class="addressInfoEl">
+                      <div class="addressInfoElImg">
+                        <img src="{% static "images/contacts/mail.svg" %}" alt="">
+                      </div>
+                      <div class="addressInfoElText">
+                          <a href="mailto:nda@nda.ru">nda@nda.ru</a>
+                      </div>
+                  </div>
+              </div>
+          </div>
+          <div class="ContactAddress">
+              <div class="addressImg">
+                <img src="{% static "images/contacts/contactsThird.svg" %}" alt="">
+                  
+              </div>
+              <div class="addressInfo">
+                  <h3>склад</h3>
+                  <div class="addressInfoEl">
+                      <div class="addressInfoElImg">
+                        <img src="{% static "images/contacts/location.svg" %}" alt="">
+                      </div>
+                      <div class="addressInfoElText">
+                          198095, Санкт-Петербург, Михайловский пер., <br> д.4 Лит. АН
+                      </div>
+                  </div>
+                  <div class="addressInfoEl">
+                      <div class="addressInfoElImg">
+                        <img src="{% static "images/contacts/call.svg" %}" alt="">
+                      </div>
+                      <div class="addressInfoElText">
+                          <a href="tel:+78127140614">+7 (812) 714 - 06 -14</a>
+                      </div>
+                  </div>
+                  <div class="addressInfoEl">
+                      <div class="addressInfoElImg">
+                        <img src="{% static "images/contacts/time.svg" %}" alt="">
+                      </div>
+                      <div class="addressInfoElText">
+                          с 10:00 до 18:00
+                      </div>
+                  </div>
+                  <div class="addressInfoEl">
+                      <div class="addressInfoElImg">
+                        <img src="{% static "images/contacts/mail.svg" %}" alt="">
+                      </div>
+                      <div class="addressInfoElText">
+                          <a href="mailto:nda@nda.ru">nda@nda.ru</a>
+                      </div>
+                  </div>
+              </div>
+          </div>
+      </div>
+     <!-- адреса -->
+      <!-- заявка -->
+      <div class="application">
+          <div class="applicationText">
+              <h3>Оставьте
+                  свою заявку</h3>
+              <p>Заполните форму и мы свяжемся с вами в ближайшее время</p>
+          </div>
+          <div class="applicationForm">
+              <form>
+                  <div class="form-floating">
+                      <input type="text" class="form-control" id="name" placeholder="Ваше имя" required>
+                      <label for="name">Ваше имя</label>
+                  </div>
+                  <div class="form-floating">
+                      <input type="tel" class="form-control" placeholder="Ваш телефон" id='number'
+                          required>
+                      <label for="number">Email</label>
+                  </div>
+                  <!-- <div class="g-recaptcha mb-3" data-sitekey="ВАШ_САЙТ_КЛЮЧ"></div> -->
+                  <button type="submit" class="btn btn-success">Отправить</button>
+                  <p>Я прочел (прочла) Уведомление о <a href="#">политики конфиденциальности</a></p>
+              </form>
+          </div>
+      </div>
+
+
+      <!-- заявка -->
+    </div>
+       <!-- плавающий элемент с формами связи -->
+       {% include "core/components/formsContainer.html" %}
+
+        <!-- плавающий элемент с формами связи -->
+</main>
+{% endblock %}   
+
+
+  
+
+   
