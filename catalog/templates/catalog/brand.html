@@ -78,17 +78,50 @@
 
   <main class="main">
     <div class="container1">
-        {% comment %} {% include 'catalog/components/breadcrumbs.html' %} {% endcomment %}
-        <div class="breadCrumbs">
-            <ol class="breadcrumb">
-              <li class="breadcrumb-item fs-4">
-                <a href="{% url 'home' %}" style="color: var(--color-theme-main)">ГЛАВНАЯ</a>
-              </li>
-              <li class="breadcrumb-item active fs-4" aria-current="page">{{ brand.name.upper }}</li>
-            </ol>
+      {% comment %} {% include 'catalog/components/breadcrumbs.html' %} {% endcomment %}
+      <div class="breadCrumbs">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item fs-4">
+            <a href="{% url 'home' %}" style="color: var(--color-theme-main)">ГЛАВНАЯ</a>
+          </li>
+          <li class="breadcrumb-item active fs-4" aria-current="page">{{ brand.name.upper }}</li>
+        </ol>
+      </div>
+
+      <div class="catalogBrand">
+        <!-- Выбор по производителям -->
+        <div class="catalogBrandItems">
+          {% for category in categories %}
+            {% if category.is_final %}
+              <div class="catalogBrandItem">
+                <a href="{% url 'offer' brand_slug=category.brand.slug category_slug=category.slug %}">
+                  <div class="catalogBrandItemImg">
+                    <img src="{{ category.logo.url }}" />
+                  </div>
+                  <div class="catalogBrandItemTitle">{{ category.name }}</div>
+                </a>
+              </div>
+            {% else %}
+              <div class="catalogBrandItem">
+                <a href="{% url 'offer' brand_slug=category.brand.slug category_slug=category.slug %}">
+                  <div class="catalogBrandItemImg">
+                    <img src="{{ category.logo.url }}" />
+                  </div>
+                  <div class="catalogBrandItemTitle">{{ category.name }}</div>
+                </a>
+              </div>
+            {% endif %}
+          {% endfor %}
+
+          <!-- 3 пустых дива - для ровной сетки flex -->
+          <!--   <div class="emptyEl"></div>
+            <div class="emptyEl"></div>
+            <div class="emptyEl"></div>   -->
+          <!-- 3 пустых дива - для ровной сетки flex -->
         </div>
+      </div>
     </div>
-    {% cache 600 categories brand.id %}
+    {% comment %} {% cache 600 categories brand.id %}
     <div class="row row-cols-1 row-cols-md-2 mt-4">
       {% for category in categories %}
         {% if category.is_final %}
@@ -136,8 +169,7 @@
         {% endif %}
       {% endfor %}
     </div>
-    
-    {% endcache %}
-  </main>
 
+    {% endcache %} {% endcomment %}
+  </main>
 {% endblock %}

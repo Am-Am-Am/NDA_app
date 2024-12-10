@@ -120,13 +120,17 @@ class BrandsWithCertificatesView(ListView):
 
 class BrandCertificatesDetailView(DetailView):
     model = Brand
-    template_name = 'catalog/brand_certificates_detail.html'  # Указать путь к шаблону
+    template_name = 'catalog/brand_certificates_detail.html'
     context_object_name = 'brand'
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         brand = self.object
-        certificates = ModelFile.objects.filter(category__brand=brand)
+        categories = Category.objects.filter(brand=brand)
+        certificates = ModelFile.objects.filter(category__in=categories)
+        
+        # Формируем контекст для передачи в шаблон
+        context['categories'] = categories
         context['certificates'] = certificates
         return context
     

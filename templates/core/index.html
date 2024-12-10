@@ -2,29 +2,24 @@
 {% load static %}
 {% load infoblock_tag %}
 
-    
+{% block content %}
+  <header>
+    <!-- летающая шапка -->
+    {% include 'core/components/flyingHeader.html' %}
 
+    <!-- летающая шапка -->
+    <!-- subheader только на главной -->
 
-    {% block content%}
-    <header>
-        <!-- летающая шапка -->
-        {% include "core/components/flyingHeader.html" %}
-       
-        <!-- летающая шапка -->
-        <!-- subheader только на главной -->
+    {% include 'core/components/subheader.html' %}
+  </header>
+  <main>
+    {% include 'core/components/catalog.html' %}
+    <!-- формы на странице -->
 
-        {% include "core/components/subheader.html" %}
+    <!-- плавающий элемент с формами связи -->
+    {% include 'core/components/formsContainer.html' %}
 
-    </header>
-    <main>
-        {% include "core/components/catalog.html" %}
-        <!-- формы на странице -->
-
-        <!-- плавающий элемент с формами связи -->
-       {% include "core/components/formsContainer.html" %}
-
-        <!-- плавающий элемент с формами связи -->
-        <!-- формы на странице -->
-    </main>
-
-{% endblock %}   
+    <!-- плавающий элемент с формами связи -->
+    <!-- формы на странице -->
+  </main>
+{% endblock %}

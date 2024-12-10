@@ -694,7 +694,7 @@ li .active {
     border-radius: 15px;
     width: calc(100%-160px);
     padding: 80px;
-    min-height: 345px;
+    height: auto;
     box-shadow: 0 0 60px 15px rgba(0, 0, 0, 0.45);
     background: linear-gradient(135deg, #3e609a 0%, #00304e 100%);
     background-image: url('images/footerBg.png');
@@ -722,7 +722,7 @@ li .active {
     display: flex;
     color: white;
     justify-content: space-between;
-    width: 50%;
+    width: 55%;
     flex-wrap: wrap;
     align-items: start;
 }
@@ -788,9 +788,10 @@ li .active {
 }
 
 .footerBottom {
+    margin-top: 100px;
     display: flex;
     justify-content: space-between;
-    align-items: start;
+    align-items: center;
 }
 
 .footerBottom a {

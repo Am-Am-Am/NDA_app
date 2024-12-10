@@ -14,10 +14,77 @@
     }
 
 
+    .orderStepsElNumber {
+        width: 60px;
+        height: 60px;
+        font-size: 30px;
+    }
+
     .addressInfo p {
         font-size: 16px;
     }
 
+    /* work.html */
+    .work p {
+        font-size: 18px;
+    }
+
+    .reservation span {
+        font-size: 18px;
+    }
+
+    h2 {
+        font-size: 80px;
+    }
+
+
+
+    .el1 {
+        width: 639px;
+        height: 500px;
+    }
+
+    .el1 img {
+        width: 639px;
+        height: 500px;
+    }
+
+    .el2 {
+        width: 299px;
+        height: 440px;
+    }
+
+    .el2 img {
+        width: 299px;
+        height: 440px;
+    }
+
+    .el3 {
+        width: 299px;
+        height: 440px;
+    }
+
+    .el3 img {
+        width: 299px;
+        height: 440px;
+    }
+
+
+    .workInfo {
+        padding: 40px;
+    }
+
+
+    .reservationImages {
+        height: 480px;
+    }
+
+
+
+
+
+
+    /* work.html */
 
 }
 
@@ -69,7 +136,7 @@
         width: 100px;
     }
 
-    .rightSideInner{
+    .rightSideInner {
         justify-content: space-evenly;
     }
 
@@ -111,7 +178,7 @@
 
     .emptyEl {
         width: 280px;
-        
+
     }
 
     .catalogItem h3 {
@@ -140,7 +207,7 @@
         font-size: 18px;
     }
 
- 
+
     .infoMain {
         height: 600px;
     }
@@ -150,6 +217,31 @@
         font-size: 16px;
     }
 
+    /* footer */
+
+    .footerInner{
+        padding: 60px;
+    }
+
+
+    .footerLogoText{
+        font-size: 18px;
+    }
+
+    .footerDataEls span{
+        font-size: 16px;
+    }
+
+    .footerDataEls h4{
+        font-size: 18px;
+    }
+
+    .footerDataEls li{
+        font-size: 16px;
+    }
+
+
+    /* footer */
     /* product.html */
 
     .productTitleText h3 {
@@ -250,6 +342,146 @@
 
 
     /* product.html */
+
+
+    /* work.html */
+
+    h2 {
+        font-size: 80px;
+    }
+
+    .work p {
+        font-size: 16px;
+    }
+
+    .reservation span {
+        font-size: 16px;
+    }
+
+    .el1 {
+        width: 639px;
+        height: 500px;
+    }
+
+    .el1 img {
+        width: 639px;
+        height: 500px;
+    }
+
+    .el2 {
+        width: 299px;
+        height: 440px;
+    }
+
+    .el2 img {
+        width: 299px;
+        height: 440px;
+    }
+
+    .el3 {
+        width: 299px;
+        height: 440px;
+    }
+
+    .el3 img {
+        width: 299px;
+        height: 440px;
+    }
+
+
+    .workInfo {
+        padding: 40px;
+    }
+
+    .orderStepsEl p {
+        font-size: 18px;
+    }
+
+    .reservationImages {
+        height: 480px;
+    }
+
+    .reservation li {
+        font-size: 18px;
+    }
+
+
+    .workLogo {
+        margin-bottom: 20px;
+    }
+
+    .workInfo {
+        padding: 40px;
+        height: 320px;
+    }
+
+    .workInfo h2 {
+        font-size: 60px;
+    }
+
+    .workInfo p {
+        font-size: 20px
+    }
+
+    .howOrder {
+        margin-top: 140px;
+    }
+
+    h2 {
+        margin-top: 160px;
+        font-size: 60px;
+    }
+
+    .el1 {
+        width: 639px;
+        height: 500px;
+    }
+
+    .el1 img {
+        width: 639px;
+        height: 500px;
+    }
+
+    .el2 {
+        width: 299px;
+        height: 440px;
+    }
+
+    .el2 img {
+        width: 299px;
+        height: 440px;
+    }
+
+    .el3 {
+        width: 299px;
+        height: 440px;
+    }
+
+    .el3 img {
+        width: 299px;
+        height: 440px;
+    }
+
+
+    .workInfo {
+        padding: 40px;
+    }
+
+    .orderStepsEl p {
+        font-size: 18px;
+    }
+
+    .reservationImages {
+        height: 480px;
+    }
+
+    .reservation li {
+        font-size: 18px;
+    }
+
+
+    /* work.html */
+
 }
 
 
@@ -330,7 +562,7 @@
 
     .emptyEl {
         width: 220px;
-     
+
     }
 
     .catalogItem h3 {
@@ -354,16 +586,29 @@
         font-size: 14px;
     }
 
-    .sliderImg{
+    .sliderImg {
         height: 700px;
     }
 
 
-    .infoMain{
+    .infoMain {
         gap: 30px;
     }
+
+    .footerInner{
+        padding: 30px;
+    }
+
+    .footerBottom{
+        margin-top: 80px;
+    }
+
+    .footerLogo{
+        width: 45%;
+    }
+
     /* product.html */
- 
+
 
     .slider-nav {
         height: 150px;
@@ -372,9 +617,9 @@
     .productTitle {
         height: 700px;
         padding: 20px;
-    } */
+    }
 
-    .productTitleText h3 {
+    */ .productTitleText h3 {
         font-size: 20px;
     }
 
@@ -390,7 +635,7 @@
         font-size: 16px;
     }
 
-    .productTitleText li  {
+    .productTitleText li {
         font-size: 18px;
     }
 
@@ -439,7 +684,7 @@
 
     /* product.html */
     .productHead {
-    
+
         width: 100%;
     }
 
@@ -501,6 +746,71 @@
     .linkContactsEl {
         width: 300px;
     }
+
+    /* work.html */
+
+    .reservation {
+        flex-direction: column-reverse;
+    }
+
+    .reservationImages {
+        flex-wrap: nowrap;
+        justify-content: space-between;
+        gap: 0;
+        height: 350px;
+    }
+
+    .reservationText h2 {
+        text-align: center;
+    }
+
+    .el1 {
+        width: 482px;
+        height: 350px;
+    }
+
+    .el2 {
+        width: 235px;
+        height: 350px;
+    }
+
+    .el3 {
+        width: 235px;
+        height: 350px;
+    }
+
+    .el1 img {
+        width: 482px;
+        height: 350px;
+    }
+
+    .el2 img {
+        width: 235px;
+        height: 350px;
+    }
+
+    .el3 img {
+        width: 235px;
+        height: 350px;
+    }
+
+    .truck {
+        height: 350px;
+    }
+
+    .orderStepsEl p {
+        font-size: 16px;
+    }
+
+    .orderStepsElNumber {
+        margin-bottom: 20px;
+    }
+
+    .refundEl {
+        height: 300px;
+    }
+
+    /* work.html */
 
 }
 
@@ -752,7 +1062,7 @@
 
     .emptyEl {
         width: 220px;
-       
+
     }
 
     .catalogItem h3 {
@@ -792,6 +1102,22 @@
         width: 100%;
     }
 
+    .footerInfo{
+        flex-direction: column;
+    }
+
+    .footerLogo{
+        width: 100%;
+    }
+
+    .footerLogoText{
+        width: 100%;
+        margin-bottom: 30px;
+    }
+
+    .footerData{
+        width: 100%;
+    }
 
     /* brand.html */
     .main {
@@ -953,17 +1279,116 @@
     }
 
 
-    .quantity-input button{
+    .quantity-input button {
         display: none;
     }
 
-    .quantity-input{
+    .quantity-input {
         display: flex;
         align-items: center;
         justify-content: center;
     }
 
     /* product.html */
+
+    /* work.html */
+    .workInfo h2 {
+        font-size: 50px;
+    }
+
+    .workInfo p {
+        font-size: 18px;
+    }
+
+    .orderSteps {
+        flex-direction: column;
+        width: 100%;
+    }
+
+    .orderStepsEl:nth-child(n) {
+        width: 100%;
+        height: auto;
+    }
+
+    .bullingSteps {
+        gap: 20px;
+    }
+
+    .reservation {
+        flex-direction: column-reverse;
+    }
+
+    .reservationImages {
+        flex-wrap: nowrap;
+        justify-content: space-between;
+        gap: 0;
+        height: 350px;
+    }
+
+    .reservationText h2 {
+        text-align: center;
+    }
+
+    .el1 {
+        width: 280px;
+        height: 280px;
+    }
+
+    .el1 img {
+        width: 280px;
+        height: 280px;
+    }
+
+    .el2 {
+        width: 280px;
+        height: 280px;
+    }
+
+    .el2 img {
+        width: 280px;
+        height: 280px;
+    }
+
+    .el3 {
+        width: 280px;
+        height: 280px;
+    }
+
+    .el3 img {
+        width: 280px;
+        height: 280px;
+    }
+
+    .truck {
+        height: 350px;
+    }
+
+    .orderStepsEl p {
+        font-size: 16px;
+    }
+
+    .deliveryStepsEl:nth-child(1) {
+        height: 450px;
+    }
+
+    .deliveryStepsEl:nth-child(2) {
+        height: 450px;
+    }
+
+    .deliveryStepsEl:nth-child(3) {
+        height: 400px;
+    }
+
+    .deliveryStepsEl:nth-child(4) {
+        height: 400px;
+    }
+
+    .deliveryStepsEl:nth-child(5) {
+        height: 400px;
+    }
+
+
+    /* work.html */
 
 }
 
@@ -972,7 +1397,7 @@
         display: flex;
         flex-direction: column;
         align-items: center;
-       
+
 
     }
 
@@ -989,7 +1414,7 @@
     }
 
     .subheaderInfo {
-        
+
         display: flex;
         flex-direction: column;
         align-items: center;
@@ -1003,7 +1428,7 @@
         text-align: center;
     }
 
-   
+
 
     .subheaderImage {
         position: relative;
@@ -1032,7 +1457,7 @@
         margin-bottom: 0;
     }
 
-    .infoMain{
+    .infoMain {
         height: 1000px;
     }
 
@@ -1043,7 +1468,7 @@
         text-align: center;
     }
 
-    .subheaderSlider{
+    .subheaderSlider {
         padding-top: 30px;
     }
 
@@ -1053,9 +1478,9 @@
     }
 
     .emptyEl {
-  
+
         width: 240px;
-      
+
     }
 
     /* brand.html */
@@ -1102,7 +1527,7 @@
         height: 140px;
     }
 
-    .infoText h3{
+    .infoText h3 {
         font-size: 58px;
     }
 
@@ -1346,7 +1771,7 @@
         align-items: center;
     }
 
-   
+
 
     .listOrders {
         width: 100%;
@@ -1361,6 +1786,49 @@
 
 
     /* product.html */
+
+    /* work.html */
+
+    .deliveryStepsEl:nth-child(n) {
+        width: 100%;
+        height: auto;
+    }
+
+
+    .refundEl {
+        height: auto;
+    }
+
+    .truck {
+        height: 280px;
+    }
+
+    .el1 {
+        width: 300px;
+        height: 300px;
+    }
+
+    .el1 img {
+        width: 300px;
+        height: 300px;
+    }
+
+    .el2 {
+        width: 300px;
+        height: 300px;
+    }
+
+    .el2 img {
+        width: 300px;
+        height: 300px;
+    }
+
+
+    .el3 {
+        display: none;
+    }
+
+    /* work.html */
 
 }
 
@@ -1387,22 +1855,22 @@
 
     .emptyEl {
         width: 240px;
-      
+
     }
 
-    .infoText h3{
+    .infoText h3 {
         font-size: 56px;
     }
 
-    .slider-container{
+    .slider-container {
         height: 100%;
     }
-    
-    .infoMain{
+
+    .infoMain {
         height: 1100px;
     }
-    
-    .subheaderSlider{
+
+    .subheaderSlider {
         padding-top: 0px;
     }
 
@@ -1511,9 +1979,10 @@
         font-size: 37px;
     }
 
-    .productTitleText{
+    .productTitleText {
         font-size: 14px;
     }
+
     .linkContacts {
         margin-top: 10px;
         display: flex;
@@ -1578,7 +2047,8 @@
         align-items: center;
     }
 
-  
+
+
 
     .listOrders {
         width: 100%;
@@ -1592,6 +2062,24 @@
 
 
     /* product.html */
+
+    /* work.html */
+    .workInfo{
+        height: auto;
+    }
+    .workInfo p {
+        width: 100%;
+    }
+    .el3 {
+        display: none;
+    }
+
+    .el3 img {
+        display: none;
+    }
+
+
+    /* work.html */
 }
 
 
@@ -1670,11 +2158,11 @@
         margin-top: 20px;
     }
 
-    .infoText h3{
+    .infoText h3 {
         font-size: 48px;
     }
 
-    .infoMain{
+    .infoMain {
         height: 1200px;
     }
 
@@ -1683,6 +2171,21 @@
         width: auto;
         height: 40vh;
     }
+
+    /* footer */
+    .footerLogoText{
+        font-size: 14px;
+    }
+
+    .footerDataEls h4{
+        font-size: 18px;
+    }
+
+    .footerDataEls li{
+        font-size: 14px;
+    }
+
+    /* footer */
 
     /* contacts.html */
 
@@ -1858,12 +2361,38 @@
         height: auto;
     }
 
-    
-    .quantity-input input{
+
+    .quantity-input input {
         width: 100%;
     }
 
     /* product.html */
+
+       /* work.html */
+
+    .reservationImages{
+        justify-content: center;
+    }
+
+    .el1{
+        height: 300px;
+        width: auto;
+    }
+
+    .el1 img{
+        height: 300px;
+        width: auto;
+    }
+    .el2 {
+        display: none;
+    }
+
+    .el2 img {
+        display: none;
+    }
+
+    /* work.html */
+   
 }
 
 
@@ -1875,7 +2404,8 @@
         align-items: center;
         justify-content: center;
     }
-    .brandInfo{
+
+    .brandInfo {
         align-items: center;
     }
 
@@ -1883,15 +2413,15 @@
         margin-top: 120px;
     }
 
-    .infoText h3{
+    .infoText h3 {
         font-size: 42px;
     }
 
-    .subheaderSlider{
+    .subheaderSlider {
         padding-top: 0px;
     }
- 
-    .emptyEl{
+
+    .emptyEl {
         display: none;
     }
 
@@ -1921,9 +2451,21 @@
 
     /* certificatesInternalPage.html */
 
-    .btn{
+    .btn {
         font-size: 14px;
     }
+
+    /* work.html */
+    .el1{
+        height: 250px;
+        width: auto;
+    }
+
+    .el1 img{
+        height: 250px;
+        width: auto;
+    }
+    /* work.html */
 }
 
 @media (width < 480px) {
@@ -1931,9 +2473,9 @@
         margin-top: 10px;
     }
 
-    
+
     .subheader {
-        margin-top:100px;
+        margin-top: 100px;
         width: 100%;
     }
 
@@ -1990,7 +2532,7 @@
     }
 
     .subheaderImage img {
- 
+
         height: 45vh;
         margin-bottom: 2px;
     }
@@ -2186,7 +2728,7 @@
         align-items: center;
     }
 
-  
+
 
     .listOrders {
         width: 100%;
@@ -2280,11 +2822,114 @@
         height: auto;
     }
 
-    .btn{
+    .btn {
         font-size: 12px;
     }
 
     /* product.html */
+
+
+    /* work.html */
+
+
+    .workInfo {
+        padding: 20px;
+        height: auto;
+    }
+
+    .workImage {
+        width: 40px;
+        height: 40px;
+    }
+
+    .workImage img {
+        width: 40px;
+        height: 40px;
+    }
+
+    .workTitle {
+        font-weight: 400;
+        font-size: 15px;
+        width: 100%;
+    }
+
+    .workInfo h2 {
+        font-size: 37px;
+    }
+
+    .workInfo p {
+        font-size: 16px;
+        width: 100%
+    }
+
+    .howOrder {
+        margin-top: 100px;
+    }
+
+    h2 {
+        margin-top: 100px;
+        font-size: 37px;
+    }
+
+    .orderStepsEl {
+        padding: 20px;
+    }
+
+    .orderStepsElNumber {
+        height: 50px;
+        width: 50px;
+        font-size: 20px;
+    }
+
+    .bullingSteps {
+        flex-direction: column;
+        height: auto;
+        width: 100%;
+    }
+
+    .bullingStepsEl {
+        width: 100%;
+    }
+
+    .reservationImages {
+        align-items: center;
+        justify-content: center;
+        width: 100%;
+    }
+
+    .el2 {
+        display: none;
+    }
+
+    .el3 {
+        display: none;
+    }
+
+    .refund {
+        flex-direction: column;
+    }
+
+    .refundEl {
+        width: 100%;
+        height: auto;
+    }
+
+    .el1{
+        height: 200px;
+        width: auto;
+    }
+
+    .el1 img{
+        height: 200px;
+        width: auto;
+    }
+
+    .truck{
+        height: 150px;
+    }
+
+    /* work.html */
+
 }
 
 @media (width < 320px) {

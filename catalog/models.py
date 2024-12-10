@@ -153,6 +153,7 @@ class Category(BaseFields):
         verbose_name='Отметка о том, что категория является финальной и в ней содержатся товары'
     )
 
+    
     class Meta:
         ordering = ['place']
         verbose_name = 'Категория'

@@ -1,19 +1,82 @@
-<!DOCTYPE html>
+{% extends 'base1.html' %}
+{% load static %}
+
+{% comment %} <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
+  <head>
+    <meta charset="UTF-8" />
     <title>Сертификаты для {{ brand.name }}</title>
-</head>
-<body>
+  </head>
+  <body>
     <h1>Сертификаты для {{ brand.name }}</h1>
     <ul>
-        {% for certificate in certificates %}
-            <li><a href="{{ certificate.file.url }}">{{ certificate.file.name }}</a></li>
-        {% empty %}
-            <p>Нет сертификатов для данного бренда.</p>
-        {% endfor %}
+      {% for certificate in certificates %}
+        <li>
+          <a href="{{ certificate.file.url }}">{{ certificate.file.name }}</a>
+        </li>
+      {% empty %}
+        <p>Нет сертификатов для данного бренда.</p>
+      {% endfor %}
     </ul>
+  </body>
+</html> {% endcomment %}
 
-    
-</body>
-</html>
+{% block content %}
+  <header style="height: 0px;">
+    <!-- летающая шапка -->
+    {% include 'core/components/flyingHeader.html' %}
+
+    <!-- летающая шапка -->
+  </header>
+  <main class="main">
+    <div class="container1">
+      <div class="breadCrumbs">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item fs-4">
+            <a href="{% url 'home' %}" style="color: var(--color-theme-main)">ГЛАВНАЯ</a>
+          </li>
+          <li class="breadcrumb-item fs-4">
+            <a href="{% url 'brands_with_certificates' %}" style="color: var(--color-theme-main)">Сертификаты</a>
+          </li>
+          <li class="breadcrumb-item active fs-4" aria-current="page">{{ brand.name }}</li>
+        </ol>
+      </div>
+
+      {% include 'catalog/components/banner.html' %}
+
+      <div class="certificatesTable">
+        <table class="table table-responsive table-borderless">
+          <thead>
+            <tr class="table-header">
+              <th>№</th>
+              <th>Содержание документа</th>
+              <th>Номер РУ</th>
+              <th>РУ</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for category in categories %}
+              {% for certificate in certificates %}
+                {% if certificate.category == category %}
+                  <tr class="table-row">
+                    <td>{{ forloop.counter }}</td>
+                    <td>{{ category.name }}</td>
+                    <td></td>
+                    <td>
+                      <a href="{{ certificate.file.url }}">Скачать</a>
+                    </td>
+                  </tr>
+                {% endif %}
+              {% endfor %}
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+      <!-- плавающий элемент с формами связи -->
+      {% include 'core/components/formsContainer.html' %}
+
+      <!-- плавающий элемент с формами связи -->
+      <!-- формы на странице -->
+    </div>
+  </main>
+{% endblock %}
