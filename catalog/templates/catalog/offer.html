@@ -134,7 +134,7 @@
                         <div class="sliderContainer">
                             <div class="slider">
                                 {% for image in images %}
-                                    {% thumbnail image.image '600x600' as im %}
+                                    {% thumbnail image.image '600x800' as im %}
                                     <div><img class="sliderImg" src="{{im.url}}"></div>
                                     {% endthumbnail %}
                                 {% endfor %} 
@@ -147,15 +147,34 @@
                         <div class="slider-nav">
                             
                             {% for image in images %}
-                            {% thumbnail image.image '600x600' as im %}
-                            <div class="sliderNavEl"><a class="active" data-slide-index="0"><img src="{{im.url}}"></a></div>
-
-                            {% endthumbnail %} 
-
-                           {% endfor %}  
+                                {% with forloop.counter0 as index %}
+                                    {% thumbnail image.image '450x450' as im %}
+                                            <div class="sliderNavEl stick-cloned">
+                                                <a data-slide-index="-{{index}}">
+                                                    <img src="{{im.url}}" style="width: 100%">
+                                                </a>
+                                            </div>
+                                        {% endthumbnail %}
+                                        {% thumbnail image.image '450x450' as im %}
+                                            <div class="sliderNavEl">
+                                                <a class="{% if index == 0 %}active{% endif %}" data-slide-index="{{index}}">
+                                                    <img src="{{im.url}}" style="width: 100%">
+                                                </a>
+                                            </div>
+                                        {% endthumbnail %}
+                                        {% thumbnail image.image '450x450' as im %}
+                                        <div class="sliderNavEl stick-cloned">
+                                            <a data-slide-index="{{index}} + images.length + 2 ">
+                                                <img src="{{im.url}}" style="width: 100%">
+                                            </a>
+                                        </div>
+                                    {% endthumbnail %}
+                                {% endwith %}
+                            {% endfor %}
                         </div>
                            
                     </div>
+                
 
                     <div class="productTitle">
                         <div class="productTitleText">
@@ -339,6 +358,8 @@
 
                 </div>
         </div>
+
+    
     </div>
     <div class="modal fade" id="orderModal" tabindex="-1" aria-labelledby="orderModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-xl">
@@ -591,5 +612,8 @@
     </div>
     {% include 'core/components/formsContainer.html' %}
   </main>
+{% endblock %}
 
+{% block script%}
+ <script src="{% static "scripts/productSlider.js" %}"></script>
 {% endblock %}

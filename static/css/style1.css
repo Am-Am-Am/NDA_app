@@ -995,6 +995,10 @@ li .active {
     width: 100%;
 }
 
+.slick-track{
+    height: 300px;
+}
+
 .sliderContainer {
     box-shadow: 0 0 40px 3px rgba(0, 0, 0, 0.15);
     background: #fff;
@@ -1004,7 +1008,7 @@ li .active {
 }
 
 .slider-nav img {
-    height: 150px;
+    width: 100%;
     display: block;
 }
 
@@ -1020,6 +1024,11 @@ li .active {
     height: 300px;
     /* Задаем фиксированную ширину для миниатюр */
     margin: 0 10px;
+}
+
+.sliderNavEl img{
+    display: block;
+    width: 100%;
 }
 
 .slider-nav {
