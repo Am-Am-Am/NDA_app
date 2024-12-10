@@ -12,4 +12,5 @@ urlpatterns = [
     path('brand/<int:pk>/certificates/', views.BrandCertificatesDetailView.as_view(), name='brand_certificates'),
     path('work/', views.WorkView.as_view(), name='work'),
     
+    path('contact/', views.ContactFormView.as_view(), name='contact'),
 ]

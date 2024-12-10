@@ -221,3 +221,12 @@ class Offer(BaseFields):
 def set_brand_from_category(sender, instance, **kwargs):
     if instance.category and not instance.brand:
         instance.brand = instance.category.brand
+
+
+class ContactFormModel(models.Model):
+    name = models.CharField(max_length=100)
+    email = models.EmailField()
+    message = models.TextField()
+
+    def __str__(self):
+        return self.name

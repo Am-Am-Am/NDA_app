@@ -7,6 +7,9 @@ from catalog.models import Category, Brand, Offer
 from files.models import ModelFile, ModelImage
 from cart.forms import CartAddProductForm
 from django.views.generic import DetailView
+from django.core.mail import send_mail
+from .forms import ContactForm
+from django.views.generic.edit import FormView
 
 SEARCH_QUERY_PARAM = 'q'
 
@@ -139,3 +142,22 @@ class WorkView(TemplateView):
 
 class ContactsView(TemplateView):
     template_name = 'catalog/contacts.html'
+
+
+class ContactFormView(FormView):
+    template_name = 'contact.html'
+    form_class = ContactForm
+    success_url = '/contact-success/'  # Страница успеха
+
+    def form_valid(self, form):
+        # Сохраняем данные в базу данных
+        form.save()
+        
+        # Отправляем письмо
+        subject = f'Message from {form.cleaned_data["name"]}'
+        message = form.cleaned_data['message']
+        sender = form.cleaned_data['email']
+        recipients = ['your_email@example.com']  # замените на нужный адрес
+        send_mail(subject, message, sender, recipients)
+        
+        return super().form_valid(form)

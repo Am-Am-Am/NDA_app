@@ -1,0 +1,37 @@
+<div class="modal fade" id="callModal" tabindex="-1" aria-labelledby="callModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="callModalLabel">Заказать звонок</h5>
+                <button type="button" id='close2' class="btn-close" data-bs-dismiss="modal"
+                    aria-label="Закрыть"></button>
+            </div>
+            <div class="modal-body">
+                <form>
+                    <div class="form-floating mb-2">
+                        <input type="text" class="form-control" id="name" placeholder="Ваше имя" required>
+                        <label for="name">Ваше имя</label>
+                    </div>
+                    <div class="form-floating mb-2">
+                        <input type="tel" class="form-control" placeholder="Ваш телефон" id='number'
+                            required>
+                        <label for="number">Ваш телефон</label>
+                    </div>
+                    <div class="form-floating mb-2">
+                        <textarea class="form-control" placeholder="Комментарий" id="comm"
+                            required></textarea>
+                        <label for="comm">Комментарий</label>
+                    </div>
+                    <div class="mb-2">
+                        <label class="input-file">
+                            <input type="file" name="file">
+                            <span>Прикрепить файл</span>
+                        </label>
+                    </div>
+                    <!-- <div class="g-recaptcha mb-3" data-sitekey="ВАШ_САЙТ_КЛЮЧ"></div> -->
+                    <button type="submit" class="btn btn-success">Отправить</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

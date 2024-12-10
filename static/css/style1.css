@@ -982,6 +982,10 @@ li .active {
     justify-content: space-around;
 }
 
+.slick-track {
+    height: 300px;
+}
+
 .slider div {
     display: flex;
     justify-content: center;
@@ -993,10 +997,6 @@ li .active {
 
 .slider-nav div {
     width: 100%;
-}
-
-.slick-track{
-    height: 300px;
 }
 
 .sliderContainer {
@@ -1218,7 +1218,7 @@ li .active {
 }
 
 .productInfo {
-    margin-top: 140px;
+    margin-top: 200px;
 }
 
 

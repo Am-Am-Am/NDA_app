@@ -20,7 +20,7 @@
             slidesToShow: 4,
             slidesToScroll: 1,
             asNavFor: $slider,
-            focusOnSelect: false,
+            focusOnSelect: true,
             arrows: false,
         });
 

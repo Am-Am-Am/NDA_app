@@ -1,0 +1,52 @@
+<div class="modal fade" id="emailModal" tabindex="-1" aria-labelledby="emailModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="emailModalLabel">Написать письмо</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Закрыть"
+                    id='close1'></button>
+            </div>
+            <div class="modal-body">
+                <form>
+                    <div class="form-floating mb-2">
+                        <input type="text" class="form-control" id="name" placeholder="Ваше имя" required>
+                        <label for="name">Ваше имя</label>
+                    </div>
+                    <div class="form-floating mb-2">
+                        <input type="tel" class="form-control" id="phone" placeholder="Ваш телефон"
+                            required>
+                        <label for="phone">Ваш телефон</label>
+                    </div>
+                    <div class="form-floating mb-2">
+                        <input type="email" class="form-control" id="email" placeholder="Ваш Email"
+                            required>
+                        <label for="email">Ваш Email</label>
+                    </div>
+                    <div class="form-floating mb-2">
+                        <input type="text" class="form-control" id="org" placeholder="Название организации"
+                            required>
+                        <label for="org">Название организации</label>
+                    </div>
+                    <div class="form-floating mb-2">
+                        <input type="text" class="form-control" id="inn" placeholder="ИНН" required>
+                        <label for="org">ИНН</label>
+                    </div>
+                    <div class="form-floating mb-2">
+                        <textarea class="form-control" placeholder="Текст письма" id="text"
+                            required></textarea>
+                        <label for="org">Текст письма</label>
+                    </div>
+                    <div class="mb-2">
+                        <label class="input-file">
+                            <input type="file" name="file">
+                            <span>Прикрепить файл</span>
+                        </label>
+                    </div>
+                    
+                    <!-- <div class="g-recaptcha mb-3" data-sitekey="ВАШ_САЙТ_КЛЮЧ"></div> -->
+                    <button type="submit" class="btn btn-success">Отправить</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
