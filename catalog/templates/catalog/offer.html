@@ -1,124 +1,169 @@
-{% extends 'base1.html' %}
+{% extends 'core/base.html' %}
 {% load static %}
 {% load thumbnail %}
-{% comment %} {% block title %}
-  <title>{{ category.name }}</title>
-{% endblock %}
+{% block title %}<title>{{ category.name }}</title>{% endblock %}
 {% block header %}
-
 {% endblock %}
+{% block content %}
 
-{% include 'catalog/components/banner.html' %}
+    {% include 'catalog/components/banner.html' %}
 
-  {% include 'core/components/search_field.html' %}
+    {% include 'core/components/search_field.html' %}
 
-  <script src="{% static '/js/carousel.js' %}"></script>
-  <script src="{% static '/js/offers-htmx-handlers.js' %}"></script> 
+    <script src="{% static '/scripts/carousel.js' %}"></script>
+    <script src="{% static '/scripts/offers-htmx-handlers.js' %}"></script>
 
-  <div class="main-container">
-   
+    <div class="main-container">
 
- <div class="row">
-      <div class="col-md-5">
-        <div class="d-flex justify-content-center align-items-center">
-          {% thumbnail images.all.0.image '450x450' as im %}
-          <img id="mainImage" src="{{ im.url }}" class="img-fluid w-auto" style="height: 450px;" />
-          {% endthumbnail %}
-        </div>
-        <div class="thumbnail-carousel carousel carousel-dark">
-          <a class="carousel-control-prev" type="button" id="prevControl">
-            <span class="offer-carousel-previous" aria-hidden="true"></span>
-            <span class="visually-hidden">Previous</span>
-          </a>
-          <a class="carousel-control-next" type="button" id="nextControl">
-            <span class="offer-carousel-next" aria-hidden="true"></span>
-            <span class="visually-hidden">Next</span>
-          </a>
-          <div class="thumbnails" style="margin: auto">
-            {% for image in images %}
-              {% thumbnail image.image '450x450' as im %}
-              <img src="{{ im.url }}" class="p-2 w-auto" style="height: 150px; " onclick="changeImage(this.src)" />
-              {% endthumbnail %}
-            {% endfor %}
-          </div>
-          {% for image in images %}
-          {% thumbnail image.image '450x450' as im %}
-          <img src="{{ im.url }}" />
-          {% endthumbnail %}
-        {% endfor %}
-        </div>
-      </div>
-      <div class="col-md-7 d-flex flex-column justify-content-start">
-        <h2 class="mb-5">{{ category.name }}</h2>
-        {{ category.description|safe }}
-      </div>
-    </div> 
+        {% include 'catalog/components/breadcrumbs.html' %}
 
-    <table class="table-responsive table-bordered my-5 w-100" style="border: 2px solid #3391c5; box-shadow: 0 0 5px 0 #000000">
-      <thead>
-        <tr style="background: rgb(249, 249, 247);">
-          <th scope="col" class="col-sm-2 text-center" style="border-right: 1px solid #a1a1a0">
-            <strong>Код</strong>
-          </th>
-          <th scope="col" class="col-sm-7 text-start" style="border-right: 1px solid #a1a1a0">
-            <strong>Описание</strong>
-          </th>
-          <th scope="col" class="col-sm-1 text-start" style="border-right: 1px solid #a1a1a0">
-            <strong>Количество в упаковке</strong>
-          </th>
-          <th scope="col" class="col-sm-2">Количество</th>
-        </tr>
-      </thead>
-      <tbody class="table-group-divider">
-        {% for offer in offers %}
-          <tr>
-            <td class="text-center align-middle" style="border-top: 1px solid #a1a1a0; border-bottom: 1px solid #a1a1a0; border-right: 1px solid #a1a1a0; font-size: 20px;">{{ offer.name }}</td>
-            <td class="text-start align-middle" style="border-top: 1px solid #a1a1a0; border-left: 1px solid #a1a1a0; border-right: 1px solid #a1a1a0; font-size: 20px;">{{ offer.description }}</td>
-            <td class="text-start align-middle" style="border-top: 1px solid #a1a1a0; border-left: 1px solid #a1a1a0; border-right: 1px solid #a1a1a0; font-size: 20px;">{{ offer.shipping_pack }}</td>
-            <td class="text-start align-middle" style="border-top: 1px solid #a1a1a0; border-left: 1px solid #a1a1a0;">
-              <form hx-post="{% url 'cart_add' offer_id=offer.pk %}" hx-target="#cart" hx-swap="outerHTML">
-                <div class="input-group justify-content-evenly">
-                  <input class="form-control" type="number" name="quantity" min="1" required="" id="id_quantity" />
-                  <button class="btn button-bg btn-primary" type="submit" value="">Добавить</button>
+        <div class="row">
+            <div class="col-md-5">
+                <div class="d-flex justify-content-center align-items-center">
+                    {% thumbnail images.all.0.image "450x450" as im %}
+                        <img id="mainImage" src="{{ im.url }}" class="img-fluid w-auto" style="height: 450px;">
+                    {% endthumbnail %}
                 </div>
-              </form>
-            </td>
-          </tr>
-        {% endfor %}
-      </tbody>
-    </table> 
-
-   <div id="cart">
-      <div>
-        Позиций в запросе: <span id="offers-in-cart-counter">{{ offers_in_cart|length }}</span>
-      </div>
-      <button type="button" class="btn button-bg btn-primary" hx-get="{% url 'cart_modal' %}" hx-target="#dialog">Отправить запрос</button>
-    </div> 
-
-    <!-- Placeholder for the modal -->
- <div id="modal" class="modal fade">
-      <div id="dialog" class="modal-dialog" hx-target="this"></div>
-    </div>
-
-    <!-- Empty toast to show the message -->
-
-    <div class="toast-container position-fixed top-0 end-0 p-3" style="z-index: 2000;">
-      <div id="toast" class="toast align-items-center text-white border-0 bg-success" role="alert" aria-live="assertive" aria-atomic="true">
-        <div class="d-flex">
-          <div id="toast-body" class="toast-body"></div>
-          <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
+                <div class="thumbnail-carousel carousel carousel-dark">
+                    <a class="carousel-control-prev" type="button" id="prevControl">
+                        <span class="offer-carousel-previous" aria-hidden="true"></span>
+                        <span class="visually-hidden">Previous</span>
+                    </a>
+                    <a class="carousel-control-next" type="button" id="nextControl">
+                        <span class="offer-carousel-next" aria-hidden="true"></span>
+                        <span class="visually-hidden">Next</span>
+                    </a>
+                    <div class="thumbnails" style="margin: auto">
+                        {% for image in images %}
+                            {% thumbnail image.image "450x450" as im %}
+                                <img src="{{ im.url }}" class="p-2 w-auto" style="height: 150px; " onclick="changeImage(this.src)">
+                            {% endthumbnail %}
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-7 d-flex flex-column justify-content-start">
+                <h2 class="mb-5">{{ category.name }}</h2>
+                {{ category.description | safe }}
+            </div>
         </div>
-      </div>
-      <div id="toast-warning" class="toast align-items-center text-white border-0 bg-warning" role="alert" aria-live="assertive" aria-atomic="true">
-        <div class="d-flex">
-          <div id="toast-warning-body" class="toast-body"></div>
-          <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
+
+{#        <div class="d-flex">#}
+{#        <div class="divTable">#}
+{#            <div class="divTableBody">#}
+{#                <div class="divTableRowHead">#}
+{#                    <div class="divTableCell">Код</div>#}
+{#                    <div class="divTableCell">Описание</div>#}
+{#                    <div class="divTableCell">Количество в упаковке</div>#}
+{#                    <div class="divTableCell">Количество</div>#}
+{#                </div>#}
+{#                {% for offer in offers %}#}
+{#                <div class="divTableRow">#}
+{#                    <div class="divTableCell"> {{ offer.name }}</div>#}
+{#                    <div class="divTableCell"> {{ offer.description }}</div>#}
+{#                    <div class="divTableCell"> {{ offer.shipping_pack }}</div>#}
+{#                    <div class="divTableCell">#}
+{#                        <form hx-post="{% url 'cart_add' offer_id=offer.pk %}" hx-target="#cart" hx-swap="outerHTML">#}
+{#                            <div class="input-group justify-content-evenly">#}
+{#                                <input class="form-control" type="number" name="quantity" min="1" required="" id="id_quantity">#}
+{#                                <button class="btn button-bg btn-primary" type="submit" value="">Добавить</button>#}
+{#                            </div>#}
+{#                        </form>#}
+{#                    </div>#}
+{#                </div>#}
+{#                {% endfor %}#}
+{#            </div>#}
+{#        </div>#}
+{#        </div>#}
+
+        <table class="table-responsive table-bordered my-5 w-100" style="border: 2px solid #3391c5; box-shadow: 0 0 5px 0 #000000">
+            <thead>
+                <tr style="background: rgb(249, 249, 247);">
+                    <th scope="col" class="col-sm-2 text-center" style="border-right: 1px solid #a1a1a0">
+                        <strong>Код</strong>
+                    </th>
+                    <th scope="col" class="col-sm-7 text-start" style="border-right: 1px solid #a1a1a0">
+                        <strong>Описание</strong>
+                    </th>
+                    <th scope="col" class="col-sm-1 text-start" style="border-right: 1px solid #a1a1a0">
+                        <strong>Количество в упаковке</strong>
+                    </th>
+                    <th scope="col" class="col-sm-2">
+                        Количество
+                    </th>
+                </tr>
+            </thead>
+            <tbody class="table-group-divider">
+            {% for offer in offers %}
+                <tr>
+                    <td class="text-center align-middle" style="border-top: 1px solid #a1a1a0; border-bottom: 1px solid #a1a1a0; border-right: 1px solid #a1a1a0; font-size: 20px;">
+                        {{ offer.name }}
+                    </td>
+                    <td class="text-start align-middle" style="border-top: 1px solid #a1a1a0; border-left: 1px solid #a1a1a0; border-right: 1px solid #a1a1a0; font-size: 20px;">
+                        {{ offer.description }}
+                    </td>
+                    <td class="text-start align-middle" style="border-top: 1px solid #a1a1a0; border-left: 1px solid #a1a1a0; border-right: 1px solid #a1a1a0; font-size: 20px;">
+                        {{ offer.shipping_pack }}
+                    </td>
+                    <td class="text-start align-middle" style="border-top: 1px solid #a1a1a0; border-left: 1px solid #a1a1a0;">
+                        <form hx-post="{% url 'cart_add' offer_id=offer.pk %}" hx-target="#cart" hx-swap="outerHTML">
+                            <div class="input-group justify-content-evenly">
+                                <input class="form-control" type="number" name="quantity" min="1" required="" id="id_quantity">
+                                <button class="btn button-bg btn-primary" type="submit" value="">Добавить</button>
+                               
+                            </div>
+                        </form>
+                    </td>
+
+                </tr>
+            
+            {% endfor %}
+            </tbody>
+        </table>
+        
+        <div id="cart">
+            <div>Позиций в запросе: <span id="offers-in-cart-counter">{{ offers_in_cart|length }}</span></div>
+            <button
+                    type="button"
+                    class="btn button-bg btn-primary"
+                    hx-get="{% url 'cart_modal' %}"
+                    hx-target="#dialog"
+            >
+                Отправить запрос
+            </button>
         </div>
-      </div>
+
+        
+
+        <!-- Placeholder for the modal -->
+        <div id="modal" class="modal fade">
+            <div id="dialog" class="modal-dialog" hx-target="this"></div>
+        </div>
+
+        <!-- Empty toast to show the message -->
+
+        <div class="toast-container position-fixed top-0 end-0 p-3" style="z-index: 2000;">
+            <div id="toast" class="toast align-items-center text-white border-0 bg-success" role="alert" aria-live="assertive"
+            aria-atomic="true">
+                <div class="d-flex">
+                    <div id="toast-body" class="toast-body"></div>
+                    <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close">
+                    </button>
+                </div>
+            </div>
+            <div id="toast-warning" class="toast align-items-center text-white border-0 bg-warning" role="alert" aria-live="assertive"
+            aria-atomic="true">
+                <div class="d-flex">
+                    <div id="toast-warning-body" class="toast-body"></div>
+                    <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close">
+                    </button>
+                </div>
+            </div>
+        </div>
     </div>
-  </div>  {% endcomment %}
+{% endblock %}
   
-  {% block content %}
+  {% comment %} {% block content %}
 
   <header style="height: 0px;">
     {% include 'core/components/flyingHeader.html' %}
@@ -617,4 +662,4 @@
 
 {% block script%}
  <script src="{% static "scripts/productSlider.js" %}"></script>
-{% endblock %}
+{% endblock %} {% endcomment %}
